@@ -21,7 +21,7 @@
             Components = components;
         }
 
-        // Constructeur d'initialisation
+        public Recipe() : this(new List<Component>()) { }
 
         #endregion
 
@@ -29,7 +29,13 @@
 
         public override string ToString()
         {
+            string result = $"Recipe with {Components.Count} component(s):\n";
 
+            foreach (Component component in Components)
+            {
+                result += $"- {component.Name} x{component.Quantity}\n";
+            }
+            return result.TrimEnd(); // Pour éviter une ligne vide à la fin
         }
 
         #endregion

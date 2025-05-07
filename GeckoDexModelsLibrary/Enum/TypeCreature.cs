@@ -1,7 +1,8 @@
 ﻿namespace GeckoDexModelsLibrary
 {
-    public enum TypeDinosaure
+    public enum TypeCreature
     {
+        Undefined,
         Terestrial,
         Aquatic,
         Aerial,

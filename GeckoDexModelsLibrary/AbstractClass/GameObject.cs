@@ -51,7 +51,6 @@
 
         #region Abstract Methods
 
-        public abstract string ShowDescription(string description);
 
         #endregion
     }

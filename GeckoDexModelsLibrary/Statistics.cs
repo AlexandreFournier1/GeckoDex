@@ -69,7 +69,7 @@
             Strength = strength;
         }
 
-        public Statistics() : this(0, 0, 0, 0, 0, 0, 0);
+        public Statistics() : this(0, 0, 0, 0, 0, 0, 0) { }
 
         #endregion
 

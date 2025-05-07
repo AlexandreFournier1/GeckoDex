@@ -2,6 +2,7 @@
 {
     public enum CategoryFood
     {
+        Undefined,
         Kibble,
         RawMeatPrime,
         CookedMeatPrime,
@@ -12,6 +13,6 @@
         RawFish,
         CookedFish,
         Berries,
-        Vegetables,
+        Vegetables
     }
 }

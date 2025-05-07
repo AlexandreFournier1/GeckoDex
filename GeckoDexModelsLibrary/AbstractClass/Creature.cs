@@ -8,6 +8,7 @@
         private string _name;
         private string _imagePath;
         private Statistics _statistics;
+        private TypeCreature _typeCreature;
 
         public int Id
         {
@@ -33,19 +34,26 @@
             set { _statistics = value; }
         }
 
+        public TypeCreature TypeCreature
+        {
+            get { return _typeCreature; }
+            set { _typeCreature = value; }
+        }
+
         #endregion
 
         #region Constructors
 
-        protected Creature(int id, string name, string imagePath, Statistics statistics)
+        protected Creature(int id, string name, string imagePath, Statistics statistics, TypeCreature typeCreature)
         {
             Id = id;
             Name = name;
             ImagePath = imagePath;
             Statistics = statistics;
+            TypeCreature = typeCreature;
         }
 
-        protected Creature() : this(0, "undefined", "undefined", new Statistics());
+        protected Creature() : this(0, "undefined", "undefined", new Statistics(), TypeCreature.Undefined);
 
         #endregion
     }

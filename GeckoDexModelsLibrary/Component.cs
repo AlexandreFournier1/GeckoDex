@@ -8,10 +8,6 @@ namespace GeckoDexModelsLibrary
 
         private int _quantity;
 
-        public Component()
-        {
-        }
-
         public int Quantity
         {
             get { return _quantity; }
@@ -27,7 +23,7 @@ namespace GeckoDexModelsLibrary
             Quantity = quantity;
         }
 
-        // Constructeur d'initialisation
+        public Component() : this(0, "undefined", "undefined", "undefined", 0) { }
 
         #endregion
 
@@ -39,11 +35,6 @@ namespace GeckoDexModelsLibrary
                     $"-> {Description}\n" + 
                     $"----------\n" +
                     $"Quantity : {Quantity}";
-        }
-
-        public override string ShowDescription(string description)
-        {
-            return description;
         }
 
         #endregion
