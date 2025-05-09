@@ -53,8 +53,6 @@
             TypeCreature = typeCreature;
         }
 
-        protected Creature() : this(0, "undefined", "undefined", new Statistics(), TypeCreature.Undefined);
-
         #endregion
     }
 }

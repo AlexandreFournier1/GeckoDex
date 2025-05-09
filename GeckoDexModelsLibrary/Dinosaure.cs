@@ -23,7 +23,7 @@ namespace GeckoDexModelsLibrary
             get { return _narcoticUsed; }
             set { _narcoticUsed = value; }
         }
-        
+
         public int TamingTime
         {
             get { return _tamingTime; }

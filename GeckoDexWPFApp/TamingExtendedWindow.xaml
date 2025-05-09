@@ -1,0 +1,84 @@
+﻿<Window x:Class="GeckoDexWPFApp.TamingExtendedWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GeckoDexWPFApp"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="TamingExtendedWindow" Height="500" Width="800"
+        Background="#FFFFF0B3">
+
+    <Grid Margin="10">
+        <DockPanel LastChildFill="True">
+
+            <!-- ComboBox du niveau à droite, alignée avec les onglets -->
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,5">
+                <TextBlock Text="Level:" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,5,0"/>
+                <ComboBox Width="80">
+                    <ComboBox.ItemsSource>
+                        <x:Array Type="sys:Int32">
+                            <sys:Int32>1</sys:Int32>
+                            <sys:Int32>25</sys:Int32>
+                            <sys:Int32>50</sys:Int32>
+                            <sys:Int32>75</sys:Int32>
+                            <sys:Int32>100</sys:Int32>
+                            <sys:Int32>200</sys:Int32>
+                            <sys:Int32>300</sys:Int32>
+                            <sys:Int32>400</sys:Int32>
+                        </x:Array>
+                    </ComboBox.ItemsSource>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Onglets -->
+            <TabControl>
+                <!-- Onglet Statistics -->
+                <TabItem Header="Statistics">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Statistiques de base -->
+                        <GroupBox Header="Base Statistics" Margin="0,0,0,10">
+                            <StackPanel>
+                                <TextBlock Text="Health: 1000" Margin="5"/>
+                                <TextBlock Text="Stamina: 500" Margin="5"/>
+                                <TextBlock Text="Speed: 100%" Margin="5"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- Statistiques après apprivoisement -->
+                        <GroupBox Header="Tamed Statistics" Grid.Row="1">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                    <TextBlock Text="Food Type:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                    <ComboBox Width="150">
+                                        <ComboBoxItem Content="Kibble"/>
+                                        <ComboBoxItem Content="Raw Meat"/>
+                                        <ComboBoxItem Content="Cooked Meat"/>
+                                        <ComboBoxItem Content="Berries"/>
+                                    </ComboBox>
+                                </StackPanel>
+                                <TextBlock Text="Health: 1200" Margin="5"/>
+                                <TextBlock Text="Stamina: 600" Margin="5"/>
+                                <TextBlock Text="Speed: 110%" Margin="5"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </Grid>
+                </TabItem>
+
+                <!-- Onglet Taming -->
+                <TabItem Header="Taming">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Temps d'apprivoisement, quantité de nourriture requise, etc."/>
+                        <!-- Tu pourras ajouter ici des données calculées ou simulées -->
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+
+        </DockPanel>
+    </Grid>
+</Window>

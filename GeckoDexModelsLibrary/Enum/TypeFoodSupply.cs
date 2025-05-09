@@ -2,6 +2,7 @@
 {
     public enum TypeFoodSupply
     {
+        Undefined,
         Herbivore,
         Carnivore,
         Omnivore,

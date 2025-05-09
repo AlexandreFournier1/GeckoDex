@@ -8,4 +8,53 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Img\CatalogueButton.png" />
+    <None Remove="Img\ClipBoardButton.png" />
+    <None Remove="Img\Dinosaure\Pteranodon.png" />
+    <None Remove="Img\Dinosaure\Rex.png" />
+    <None Remove="Img\Dinosaure\Triceratops.png" />
+    <None Remove="Img\MemoButton.png" />
+    <None Remove="Img\NoteBookButton.png" />
+    <None Remove="Img\SearchButton.png" />
+    <None Remove="Img\User.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Img\ClipBoardButton.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GeckoDexModelsLibrary\GeckoDexModelsLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Img\CatalogueButton.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Pteranodon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Rex.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Triceratops.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\MemoButton.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\NoteBookButton.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\SearchButton.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\User.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
 </Project>

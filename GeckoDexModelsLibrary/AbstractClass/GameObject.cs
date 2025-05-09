@@ -45,8 +45,6 @@
             ImagePath = imagePath;
         }
 
-        protected GameObject() : this(1, "undefined", "undefined", "undefined");
-
         #endregion
 
         #region Abstract Methods
