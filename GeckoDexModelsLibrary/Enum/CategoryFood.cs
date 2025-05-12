@@ -4,6 +4,8 @@
     {
         Undefined,
         Kibble,
+        RawMutton,
+        CookedMutton,
         RawMeatPrime,
         CookedMeatPrime,
         RawMeat,

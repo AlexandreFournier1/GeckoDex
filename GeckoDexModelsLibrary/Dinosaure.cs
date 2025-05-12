@@ -8,6 +8,7 @@ namespace GeckoDexModelsLibrary
 
         private TypeFoodSupply _typeFoodSupply;
         private CategoryFood _preferedFood;
+        private Kibble _preferedKibble;
         private Narcotic _narcoticUsed;
         private int _narcoticAmount;
         private int _tamingTime;
@@ -16,6 +17,12 @@ namespace GeckoDexModelsLibrary
         {
             get { return _typeFoodSupply; }
             set { _typeFoodSupply = value; }
+        }
+
+        public Kibble PreferedKibble
+        {
+            get { return _preferedKibble; }
+            set { _preferedKibble = value; }
         }
 
         public Narcotic NarcoticUsed
@@ -46,16 +53,17 @@ namespace GeckoDexModelsLibrary
 
         #region Constructors
 
-        public Dinosaure(int id, string name, string imagePath, Statistics statistics, TypeFoodSupply typeFoodSupply, CategoryFood preferedFood, Narcotic narcoticUsed, int narcoticAmount, int tamingTime, TypeCreature typeCreature) : base(id, name, imagePath, statistics, typeCreature)
+        public Dinosaure(int id, string name, string imagePath, Statistics statistics, TypeFoodSupply typeFoodSupply, CategoryFood preferedFood, Narcotic narcoticUsed, int narcoticAmount, int tamingTime, TypeCreature typeCreature, Kibble preferedKibble) : base(id, name, imagePath, statistics, typeCreature)
         {
             TypeFoodSupply = typeFoodSupply;
             PreferedFood = preferedFood;
             NarcoticUsed = narcoticUsed;
             NarcoticAmount = narcoticAmount;
             TamingTime = tamingTime;
+            PreferedKibble = preferedKibble;
         }
 
-        public Dinosaure() : this(0, "undefined", "undefined", new Statistics(), TypeFoodSupply.Undefined, CategoryFood.Undefined, new Narcotic(), 0, 0, TypeCreature.Undefined) { }
+        public Dinosaure() : this(0, "undefined", "undefined", new Statistics(), TypeFoodSupply.Undefined, CategoryFood.Undefined, new Narcotic(), 0, 0, TypeCreature.Undefined, new Kibble()) { }
 
         #endregion
 

@@ -1,0 +1,26 @@
+﻿[
+  {
+    "Id": 500,
+    "Name": "Narcotic",
+    "Description": "Increases your health, but puts you to sleep.",
+    "ImagePath": null,
+    "Recipe": {
+      "Components": [
+        {
+          "Id": 600,
+          "Name": "Narcoberry",
+          "Description": "This fairly common black berry makes you sleepy when you eat it. Bitter, but can be used to make black dye.",
+          "ImagePath": null,
+          "Quantity": 5
+        },
+        {
+          "Id": 202,
+          "Name": "Spoiled Meat",
+          "Description": "This fairly common black berry makes you sleepy when you eat it. Bitter, but can be used to make black dye.",
+          "ImagePath": null,
+          "Quantity": 5
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,41 @@
+﻿/* 
+  Code des différents identifiants : 
+  - 100 à 199 = Dinosaures
+    - T-Rex = 100
+  - 200 à 299 = Consommables
+    - Focal Chili = 200
+    - Rare Flower = 201
+    - Spoiled Meat = 202
+  - 300 à 399 = Items
+    - Fiber = 300
+  - 400 à 499 = Kibble
+    - Exceptional = 400
+  - 500 à 599 = Narcotic --> Se limiter à ça
+    - Narcotic = 500
+  - 600 à 699 = Berry
+    - Narcoberry = 600
+    - Mejoberry = 601
+*/
+[
+  {
+    "Id": 100,
+    "Name": "T-Rex",
+    "ImagePath": "C:\\Cours Supérieure\\BAC 2\\Q2\\C#\\FinalProject_AlexandreFournierD202\\GeckoDexWPFApp\\Img\\Dinosaure\\Rex.png",
+    "Statistics": {
+      "Health": 1100,
+      "Stamina": 420,
+      "Oxygen": 150,
+      "Food": 3000,
+      "Weight": 500,
+      "Speed": 100,
+      "Strength": 100
+    },
+    "TypeCreature": "Terestrial",
+    "TypeFoodSupply": "Carnivore",
+    "CategoryFood": "RawMutton",
+    "KibbleId": 400,
+    "NarcoticId": 500,
+    "NarcoticAmount": 1,
+    "TamingTime": 614 // Temps en secondes
+  }
+]

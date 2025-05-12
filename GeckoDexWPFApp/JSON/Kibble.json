@@ -1,0 +1,43 @@
+﻿[
+  {
+    "Id": 400,
+    "Name": "Exceptional",
+    "Description": "This specially blended pet food is a favorite of many extra large creatures. Containing only the finest natural ingredients, it provides pets with the balanced nutrition they need. And with a taste they can't resist, they'll warm up to you in no time! Not intended for human consumption.",
+    "ImagePath": null,
+    "KibbleType": "Exceptional",
+    "TamingEffectiveness": 99.8,
+    "FoodPoints": 85.2,
+    "Recipe": {
+      "Components": [
+        {
+          "Id": 200,
+          "Name": "Focal Chili",
+          "Description": "This filling dish is full of nutritional energy. Consume it to gain increased craft speed, and gain increased movement speed. Effects last 15 minutes.",
+          "ImagePath": null,
+          "Quantity": 1
+        },
+        {
+          "Id": 201,
+          "Name": "Rare Flower",
+          "Description": "Even the smell of this flower makes you slightly angry.",
+          "ImagePath": null,
+          "Quantity": 1
+        },
+        {
+          "Id": 601,
+          "Name": "Mejoberry",
+          "Description": "This wild berry grows mostly on mountains. While not tasty on its own, its juices improve almost every meal.",
+          "ImagePath": null,
+          "Quantity": 10
+        },
+        {
+          "Id": 300,
+          "Name": "Fiber",
+          "Description": "Delicately collected strands of plant. Perfect for making thread, cloth, or rope.",
+          "ImagePath": null,
+          "Quantity": 5
+        }
+      ]
+    }
+  }
+]

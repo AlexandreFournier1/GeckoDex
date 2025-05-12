@@ -1,15 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppGeckoDex", "ConsoleAppGeckoDex\ConsoleAppGeckoDex.csproj", "{C0BAEE89-FC23-4CEB-82F6-BFAEB16D263B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeckoDexModelsLibrary", "GeckoDexModelsLibrary\GeckoDexModelsLibrary.csproj", "{EA8ECEEA-313D-4BC0-8D0A-4FED1421C1BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeckoDexTamingLibrary", "GeckoDexTamingLibrary\GeckoDexTamingLibrary.csproj", "{D9069751-C5DD-46A3-A7F5-4AED9415A5CD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EA8ECEEA-313D-4BC0-8D0A-4FED1421C1BB} = {EA8ECEEA-313D-4BC0-8D0A-4FED1421C1BB}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeckoDexWPFApp", "GeckoDexWPFApp\GeckoDexWPFApp.csproj", "{0BDBED15-8687-4C22-9BA4-FAAB17340E0B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C0BAEE89-FC23-4CEB-82F6-BFAEB16D263B} = {C0BAEE89-FC23-4CEB-82F6-BFAEB16D263B}
+		{D9069751-C5DD-46A3-A7F5-4AED9415A5CD} = {D9069751-C5DD-46A3-A7F5-4AED9415A5CD}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +43,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40E7A131-5F70-49D1-9A7F-4B88AC6E0853}
 	EndGlobalSection
 EndGlobal

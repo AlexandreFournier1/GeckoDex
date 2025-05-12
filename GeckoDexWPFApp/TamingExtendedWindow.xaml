@@ -8,77 +8,104 @@
         mc:Ignorable="d"
         Title="TamingExtendedWindow" Height="500" Width="800"
         Background="#FFFFF0B3">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10,5"/>
+        </Style>
+    </Window.Resources>
 
     <Grid Margin="10">
-        <DockPanel LastChildFill="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Boutons + ComboBox -->
+            <RowDefinition Height="*"/>
+            <!-- Contenu -->
+        </Grid.RowDefinitions>
 
-            <!-- ComboBox du niveau à droite, alignée avec les onglets -->
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,5">
-                <TextBlock Text="Level:" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,5,0"/>
-                <ComboBox Width="80">
-                    <ComboBox.ItemsSource>
-                        <x:Array Type="sys:Int32">
-                            <sys:Int32>1</sys:Int32>
-                            <sys:Int32>25</sys:Int32>
-                            <sys:Int32>50</sys:Int32>
-                            <sys:Int32>75</sys:Int32>
-                            <sys:Int32>100</sys:Int32>
-                            <sys:Int32>200</sys:Int32>
-                            <sys:Int32>300</sys:Int32>
-                            <sys:Int32>400</sys:Int32>
-                        </x:Array>
-                    </ComboBox.ItemsSource>
-                </ComboBox>
+        <!-- Top bar: boutons à gauche + ComboBox à droite -->
+        <DockPanel Grid.Row="0" Margin="0,0,0,10">
+            <!-- Boutons -->
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <Button Content="Statistics" Click="StatisticsButton_Click" Background="#FFD16F1E" BorderBrush="#FF5E330A"/>
+                <Button Content="Taming" Click="TamingButton_Click" Background="#FFD16F1E" BorderBrush="#FF5E330A"/>
             </StackPanel>
 
-            <!-- Onglets -->
-            <TabControl>
-                <!-- Onglet Statistics -->
-                <TabItem Header="Statistics">
-                    <Grid Margin="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <!-- Statistiques de base -->
-                        <GroupBox Header="Base Statistics" Margin="0,0,0,10">
-                            <StackPanel>
-                                <TextBlock Text="Health: 1000" Margin="5"/>
-                                <TextBlock Text="Stamina: 500" Margin="5"/>
-                                <TextBlock Text="Speed: 100%" Margin="5"/>
-                            </StackPanel>
-                        </GroupBox>
-
-                        <!-- Statistiques après apprivoisement -->
-                        <GroupBox Header="Tamed Statistics" Grid.Row="1">
-                            <StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                    <TextBlock Text="Food Type:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                                    <ComboBox Width="150">
-                                        <ComboBoxItem Content="Kibble"/>
-                                        <ComboBoxItem Content="Raw Meat"/>
-                                        <ComboBoxItem Content="Cooked Meat"/>
-                                        <ComboBoxItem Content="Berries"/>
-                                    </ComboBox>
-                                </StackPanel>
-                                <TextBlock Text="Health: 1200" Margin="5"/>
-                                <TextBlock Text="Stamina: 600" Margin="5"/>
-                                <TextBlock Text="Speed: 110%" Margin="5"/>
-                            </StackPanel>
-                        </GroupBox>
-                    </Grid>
-                </TabItem>
-
-                <!-- Onglet Taming -->
-                <TabItem Header="Taming">
-                    <StackPanel Margin="10">
-                        <TextBlock Text="Temps d'apprivoisement, quantité de nourriture requise, etc."/>
-                        <!-- Tu pourras ajouter ici des données calculées ou simulées -->
-                    </StackPanel>
-                </TabItem>
-            </TabControl>
-
+            <!-- ComboBox niveau -->
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                <TextBlock Text="Level:" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,5,0" Foreground="#FF5E330A"/>
+                <ComboBox x:Name="LevelComboBox" Width="80" IsEditable="True"/>
+            </StackPanel>
         </DockPanel>
+
+        <!-- Contenu dynamique -->
+        <Grid Grid.Row="1">
+            <!-- STATISTICS -->
+            <Grid x:Name="StatisticsPanel" Visibility="Visible" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Header="Base Statistics" Margin="0,0,0,10" Foreground="#FF5E330A" BorderBrush="#FF5E330A" BorderThickness="2" Background="#FFFFD9A6">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="BaseStatsItemsControl">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Margin="3" Foreground="#FF5E330A"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </GroupBox>
+
+                <GroupBox Header="Tamed Statistics" Grid.Row="1" Foreground="#FF5E330A" BorderBrush="#FF5E330A" BorderThickness="2" Background="#FFFFD9A6">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <TextBlock Text="Food Type:" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="#FF5E330A"/>
+                                <ComboBox x:Name="TamingFoodComboBoxStat" Width="150" 
+                                  Foreground="#FF5E330A" 
+                                  Background="#FFFFE0B2"
+                                  DisplayMemberPath="."/>
+                            </StackPanel> <!-- Faire dynamiquement en créant un objet Statistics -->
+                            <ItemsControl x:Name="TamedStatsItemsControl">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" Margin="3" Foreground="#FF5E330A"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
+                </GroupBox>
+            </Grid>
+
+            <!-- TAMING -->
+            <StackPanel x:Name="TamingPanel" Visibility="Collapsed" Margin="10" Orientation="Vertical" >
+                <GroupBox Header="Taming Information" Foreground="#FF5E330A" BorderBrush="#FF5E330A" BorderThickness="2" Background="#FFFFD9A6">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <TextBlock Text="Food Type:" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="#FF5E330A"/>
+                            <ComboBox x:Name="TamingFoodComboBox" Width="150" 
+                              Foreground="#FF5E330A" 
+                              Background="#FFFFE0B2"
+                              DisplayMemberPath="."/>
+                        </StackPanel>
+
+                        <TextBlock x:Name="TamingTimeTextBlock" Text="Temps d'apprivoisement : --:--" Margin="3" Foreground="#FF5E330A"/>
+                        <TextBlock x:Name="TamingEfficiencyTextBlock" Text="Efficacité : -- %" Margin="3" Foreground="#FF5E330A"/>
+                        <TextBlock x:Name="TamingLevelTextBlock" Text="Niveau final : --" Margin="3" Foreground="#FF5E330A"/>
+
+                        <Button Content="Ajouter au profil" Width="160"
+                            Background="#FFD16F1E"
+                            BorderBrush="#FF5E330A"
+                            FontWeight="Bold"
+                            HorizontalAlignment="Left"
+                            Click="AddTamingToProfile_Click"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
