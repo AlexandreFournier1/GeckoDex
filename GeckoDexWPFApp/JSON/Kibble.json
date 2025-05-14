@@ -1,12 +1,190 @@
 ﻿[
   {
     "Id": 400,
+    "Name": "Basic",
+    "Description": "This pet food recipe has been carefully designed to give balanced nutrition to many smaller creatures. Includes plant fibers to help with digestion and egg to bind the mix. Humans have difficulty digesting this.",
+    "ImagePath": null,
+    "KibbleType": "Basic",
+    "TamingEffectiveness": 100,
+    "FoodPoints": 80,
+    "Recipe": {
+      "Components": [
+        {
+          "Id": 203,
+          "Name": "Cooked Meat",
+          "Description": "Sates your hunger and provides health while being digested. Wild carnivores will eat it, but prefer raw meat.",
+          "ImagePath": null,
+          "Quantity": 1
+        },
+        {
+          "Id": 602,
+          "Name": "Amarberry",
+          "Description": "This yellow berry grows mostly on the beaches. Tasty, and can be used to make yellow dye.",
+          "ImagePath": null,
+          "Quantity": 10
+        },
+        {
+          "Id": 601,
+          "Name": "Mejoberry",
+          "Description": "This wild berry grows mostly on mountains. While not tasty on its own, its juices improve almost every meal.",
+          "ImagePath": null,
+          "Quantity": 5
+        },
+        {
+          "Id": 603,
+          "Name": "Tintoberry",
+          "Description": "This red berry grows mostly in wide open grasslands. Tasty, and can be used to make red dye.",
+          "ImagePath": null,
+          "Quantity": 10
+        },
+        {
+          "Id": 300,
+          "Name": "Fiber",
+          "Description": "Delicately collected strands of plant. Perfect for making thread, cloth, or rope.",
+          "ImagePath": null,
+          "Quantity": 5
+        }
+      ]
+    }
+  },
+  {
+    "Id": 401,
+    "Name": "Simple",
+    "Description": "This pet food recipe has been carefully designed to give balanced nutrition to many small creatures. Includes plant fibers to help with digestion and egg to bind the mix. Humans have difficulty digesting this.",
+    "ImagePath": null,
+    "KibbleType": "Simple",
+    "TamingEffectiveness": 100,
+    "FoodPoints": 80,
+    "Recipe": {
+      "Components": [
+        {
+          "Id": 204,
+          "Name": "Cooked Fish Meat",
+          "Description": "Sates your hunger SLIGHTLY, and provides health while being digested. Wild carnivores will eat it, but prefer raw meat.",
+          "ImagePath": null,
+          "Quantity": 1
+        },
+        {
+          "Id": 205,
+          "Name": "Rockarrot",
+          "Description": "This root vegetable seems to thrive near mammals, and not dinosaurs. As such, it can be found mostly in the mountains.",
+          "ImagePath": null,
+          "Quantity": 2
+        },
+        {
+          "Id": 601,
+          "Name": "Mejoberry",
+          "Description": "This wild berry grows mostly on mountains. While not tasty on its own, its juices improve almost every meal.",
+          "ImagePath": null,
+          "Quantity": 5
+        },
+        {
+          "Id": 300,
+          "Name": "Fiber",
+          "Description": "Delicately collected strands of plant. Perfect for making thread, cloth, or rope.",
+          "ImagePath": null,
+          "Quantity": 5
+        }
+      ]
+    }
+  },
+  {
+    "Id": 402,
+    "Name": "Regular",
+    "Description": "This specially blended pet food is a favorite of many medium creatures. Containing only the finest natural ingredients, it provides pets with the balanced nutrition they need. And with a taste they can't resist, they'll warm up to you in no time! Not intended for human consumption.",
+    "ImagePath": null,
+    "KibbleType": "Regular",
+    "TamingEffectiveness": 100,
+    "FoodPoints": 80,
+    "Recipe": {
+      "Components": [
+        {
+          "Id": 206,
+          "Name": "Cooked Meat Jerky",
+          "Description": "Sates your hunger and provides health while being digested. Lasts longer than cooked meat. Wild carnivores will eat it, but prefer raw meat.",
+          "ImagePath": null,
+          "Quantity": 1
+        },
+        {
+          "Id": 207,
+          "Name": "Longrass",
+          "Description": "This grain plant grows best in open, fertile areas. It can be eaten by the cob but more clever chefs will think of other options.",
+          "ImagePath": null,
+          "Quantity": 2
+        },
+        {
+          "Id": 208,
+          "Name": "Savoroot",
+          "Description": "This starchy tuber grows naturally in densely wooded areas. It is very hearty, but tastes better when cooked.",
+          "ImagePath": null,
+          "Quantity": 2
+        },
+        {
+          "Id": 300,
+          "Name": "Fiber",
+          "Description": "Delicately collected strands of plant. Perfect for making thread, cloth, or rope.",
+          "ImagePath": null,
+          "Quantity": 5
+        }
+      ]
+    }
+  },
+  {
+    "Id": 403,
+    "Name": "Superior",
+    "Description": "This specially blended pet food is a favorite of many larger creatures. Containing only the finest natural ingredients, it provides pets with the balanced nutrition they need. And with a taste they can't resist, they'll warm up to you in no time! Not intended for human consumption.",
+    "ImagePath": null,
+    "KibbleType": "Superior",
+    "TamingEffectiveness": 100,
+    "FoodPoints": 80,
+    "Recipe": {
+      "Components": [
+        {
+          "Id": 209,
+          "Name": "Prime Meat Jerky",
+          "Description": "Sates your hunger, and provides health while being digested. More effective than normal meat jerky, and lasts longer than Cooked Prime Meat. Wild carnivores like this meat a lot.",
+          "ImagePath": null,
+          "Quantity": 1
+        },
+        {
+          "Id": 210,
+          "Name": "Citronal",
+          "Description": "This citrus fruit grows naturally along the coast. It will probably prevent scurvy.",
+          "ImagePath": null,
+          "Quantity": 2
+        },
+        {
+          "Id": 301,
+          "Name": "Sap",
+          "Description": "A thick blob of unrefined sap.",
+          "ImagePath": null,
+          "Quantity": 1
+        },
+        {
+          "Id": 211,
+          "Name": "Rare Mushroom",
+          "Description": "You feel lightheaded after just touching this. Ingesting it would be dangerous.",
+          "ImagePath": null,
+          "Quantity": 2
+        },
+        {
+          "Id": 300,
+          "Name": "Fiber",
+          "Description": "Delicately collected strands of plant. Perfect for making thread, cloth, or rope.",
+          "ImagePath": null,
+          "Quantity": 5
+        }
+      ]
+    }
+  },
+  {
+    "Id": 404,
     "Name": "Exceptional",
     "Description": "This specially blended pet food is a favorite of many extra large creatures. Containing only the finest natural ingredients, it provides pets with the balanced nutrition they need. And with a taste they can't resist, they'll warm up to you in no time! Not intended for human consumption.",
     "ImagePath": null,
     "KibbleType": "Exceptional",
-    "TamingEffectiveness": 99.8,
-    "FoodPoints": 85.2,
+    "TamingEffectiveness": 100,
+    "FoodPoints": 80,
     "Recipe": {
       "Components": [
         {
@@ -20,6 +198,47 @@
           "Id": 201,
           "Name": "Rare Flower",
           "Description": "Even the smell of this flower makes you slightly angry.",
+          "ImagePath": null,
+          "Quantity": 1
+        },
+        {
+          "Id": 601,
+          "Name": "Mejoberry",
+          "Description": "This wild berry grows mostly on mountains. While not tasty on its own, its juices improve almost every meal.",
+          "ImagePath": null,
+          "Quantity": 10
+        },
+        {
+          "Id": 300,
+          "Name": "Fiber",
+          "Description": "Delicately collected strands of plant. Perfect for making thread, cloth, or rope.",
+          "ImagePath": null,
+          "Quantity": 5
+        }
+      ]
+    }
+  },
+  {
+    "Id": 405,
+    "Name": "Extraordinary",
+    "Description": "This specially blended pet food is a favorite of many exotic creatures. Containing only the finest natural ingredients, it provides pets with the balanced nutrition they need. And with a taste they can't resist, they'll warm up to you in no time! Not intended for human consumption.",
+    "ImagePath": null,
+    "KibbleType": "Extraordinary",
+    "TamingEffectiveness": 100,
+    "FoodPoints": 80,
+    "Recipe": {
+      "Components": [
+        {
+          "Id": 212,
+          "Name": "Giant Bee Honey",
+          "Description": "A delicious and nutritious snack, useful for luring creatures to a trap or for fishing.",
+          "ImagePath": null,
+          "Quantity": 1
+        },
+        {
+          "Id": 213,
+          "Name": "Lazarus Chowder",
+          "Description": "This creamy dish improves the body's natural constitution. Consume it to slow your rate of oxygen consumption while underwater, and gain extra health regen. Effects last 15 minutes.",
           "ImagePath": null,
           "Quantity": 1
         },

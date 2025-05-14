@@ -6,15 +6,34 @@
     - Focal Chili = 200
     - Rare Flower = 201
     - Spoiled Meat = 202
+    - Cooked Meat = 203
+    - Cooked Fish Meat = 204
+    - Rockarrot = 205
+    - Cooked Meat Jerky = 206 
+    - Longrass = 207
+    - Savoroot = 208
+    - Prime Meat Jerky = 209
+    - Citronal = 210
+    - Rare Mushroom = 211
+    - Giant Bee Honey = 212
+    - Lazarus Chowder = 213
   - 300 à 399 = Items
     - Fiber = 300
+    - Sap = 301
   - 400 à 499 = Kibble
-    - Exceptional = 400
+    - Basic = 400
+    - Simple = 401
+    - Regular = 402
+    - Superior = 403
+    - Exceptional = 404
+    - Extraordinary = 405
   - 500 à 599 = Narcotic --> Se limiter à ça
     - Narcotic = 500
   - 600 à 699 = Berry
     - Narcoberry = 600
     - Mejoberry = 601
+    - Amarberry = 602
+    - Tintoberry = 603
 */
 [
   {
@@ -33,9 +52,198 @@
     "TypeCreature": "Terestrial",
     "TypeFoodSupply": "Carnivore",
     "CategoryFood": "RawMutton",
-    "KibbleId": 400,
+    "KibbleId": 404,
+    "NarcoticId": 500,
+    "NarcoticAmount": 0, // On va dire 1 narco pour 10 min
+    "TamingTime": 614 // Temps en secondes
+  },
+  {
+    "Id": 101,
+    "Name": "Pteranodon",
+    "ImagePath": "C:\\Cours Supérieure\\BAC 2\\Q2\\C#\\FinalProject_AlexandreFournierD202\\GeckoDexWPFApp\\Img\\Dinosaure\\Pteranodon.png",
+    "Statistics": {
+      "Health": 210,
+      "Stamina": 150,
+      "Oxygen": 150,
+      "Food": 1200,
+      "Weight": 120,
+      "Speed": 100,
+      "Strength": 100
+    },
+    "TypeCreature": "Aerial",
+    "TypeFoodSupply": "Carnivore",
+    "CategoryFood": "RawMutton",
+    "KibbleId": 402,
+    "NarcoticId": 500,
+    "NarcoticAmount": 0,
+    "TamingTime": 256 // Temps en secondes
+  },
+  {
+    "Id": 102,
+    "Name": "Triceratops",
+    "ImagePath": null,
+    "Statistics": {
+      "Health": 375,
+      "Stamina": 150,
+      "Oxygen": 150,
+      "Food": 3000,
+      "Weight": 365,
+      "Speed": 100,
+      "Strength": 100
+    },
+    "TypeCreature": "Terestrial",
+    "TypeFoodSupply": "Herbivore",
+    "CategoryFood": "Vegetables",
+    "KibbleId": 401,
+    "NarcoticId": 500,
+    "NarcoticAmount": 0,
+    "TamingTime": 144 // Temps en secondes
+  },
+  {
+    "Id": 103,
+    "Name": "Raptor",
+    "ImagePath": null,
+    "Statistics": {
+      "Health": 200,
+      "Stamina": 150,
+      "Oxygen": 150,
+      "Food": 1200,
+      "Weight": 140,
+      "Speed": 100,
+      "Strength": 100
+    },
+    "TypeCreature": "Terestrial",
+    "TypeFoodSupply": "Carnivore",
+    "CategoryFood": "RawMutton",
+    "KibbleId": 401,
+    "NarcoticId": 500,
+    "NarcoticAmount": 0,
+    "TamingTime": 86 // Temps en secondes
+  },
+  {
+    "Id": 104,
+    "Name": "Argentavis",
+    "ImagePath": null,
+    "Statistics": {
+      "Health": 365,
+      "Stamina": 400,
+      "Oxygen": 150,
+      "Food": 2000,
+      "Weight": 400,
+      "Speed": 100,
+      "Strength": 100
+    },
+    "TypeCreature": "Aerial",
+    "TypeFoodSupply": "Carnivore",
+    "CategoryFood": "RawMutton",
+    "KibbleId": 403,
+    "NarcoticId": 500,
+    "NarcoticAmount": 0,
+    "TamingTime": 461 // Temps en secondes
+  },
+  {
+    "Id": 105,
+    "Name": "Brontosaurus",
+    "ImagePath": null,
+    "Statistics": {
+      "Health": 2070,
+      "Stamina": 240,
+      "Oxygen": 150,
+      "Food": 10000,
+      "Weight": 1600,
+      "Speed": 100,
+      "Strength": 100
+    },
+    "TypeCreature": "Terestrial",
+    "TypeFoodSupply": "Herbivore",
+    "CategoryFood": "Vegetables",
+    "KibbleId": 404,
+    "NarcoticId": 500,
+    "NarcoticAmount": 0,
+    "TamingTime": 430 // Temps en secondes
+  },
+  {
+    "Id": 106,
+    "Name": "Giganotosaurus",
+    "ImagePath": null,
+    "Statistics": {
+      "Health": 80000,
+      "Stamina": 400,
+      "Oxygen": 150,
+      "Food": 4000,
+      "Weight": 700,
+      "Speed": 100,
+      "Strength": 100
+    },
+    "TypeCreature": "Terestrial",
+    "TypeFoodSupply": "Carnivore",
+    "CategoryFood": "RawMutton",
+    "KibbleId": 404,
     "NarcoticId": 500,
     "NarcoticAmount": 1,
-    "TamingTime": 614 // Temps en secondes
+    "TamingTime": 921 // Temps en secondes
+  },
+  {
+    "Id": 107,
+    "Name": "Stegosaurus",
+    "ImagePath": null,
+    "Statistics": {
+      "Health": 650,
+      "Stamina": 300,
+      "Oxygen": 150,
+      "Food": 6000,
+      "Weight": 500,
+      "Speed": 100,
+      "Strength": 100
+    },
+    "TypeCreature": "Terestrial",
+    "TypeFoodSupply": "Herbivore",
+    "CategoryFood": "Vegetables",
+    "KibbleId": 402,
+    "NarcoticId": 500,
+    "NarcoticAmount": 0,
+    "TamingTime": 307 // Temps en secondes
+  },
+  {
+    "Id": 108,
+    "Name": "Mosasaurus",
+    "ImagePath": null,
+    "Statistics": {
+      "Health": 3600,
+      "Stamina": 400,
+      "Oxygen": -1, // -1 = pas de besoin d'oxygène
+      "Food": 8000,
+      "Weight": 1300,
+      "Speed": 100,
+      "Strength": 100
+    },
+    "TypeCreature": "Aquatic",
+    "TypeFoodSupply": "Carnivore",
+    "CategoryFood": "RawMutton",
+    "KibbleId": 404,
+    "NarcoticId": 500,
+    "NarcoticAmount": 0,
+    "TamingTime": 569 // Temps en secondes
+  },
+  {
+    "Id": 109,
+    "Name": "Spinosaurus",
+    "ImagePath": null,
+    "Statistics": {
+      "Health": 700,
+      "Stamina": 350,
+      "Oxygen": 650,
+      "Food": 2600,
+      "Weight": 350,
+      "Speed": 100,
+      "Strength": 100
+    },
+    "TypeCreature": "Amphibian",
+    "TypeFoodSupply": "Carnivore",
+    "CategoryFood": "RawFishPrime",
+    "KibbleId": 404,
+    "NarcoticId": 500,
+    "NarcoticAmount": 1,
+    "TamingTime": 826 // Temps en secondes
   }
 ]
