@@ -8,7 +8,7 @@ namespace GeckoDexModelsLibrary
         #region Member variables and properties
 
         private KibbleType _kibbleType;
-        private float _tamingEffectiveness;
+        private int _tamingEffectiveness;
         private int _foodPoints;
 
         public KibbleType KibbleType
@@ -17,7 +17,7 @@ namespace GeckoDexModelsLibrary
             set { _kibbleType = value; }
         }
 
-        public float TamingEffectiveness 
+        public int TamingEffectiveness 
         {
             get { return _tamingEffectiveness; }
             set { _tamingEffectiveness = value; }
@@ -32,7 +32,7 @@ namespace GeckoDexModelsLibrary
 
         #region Constructors
 
-        public Kibble(int id, string name, string description, string imagePath, Recipe recipe, KibbleType kibbleType, float tamingEffectiveness, int foodPoints) : base(id, name, description, imagePath, recipe)
+        public Kibble(int id, string name, string description, string imagePath, Recipe recipe, KibbleType kibbleType, int tamingEffectiveness, int foodPoints) : base(id, name, description, imagePath, recipe)
         {
             KibbleType = kibbleType;
             TamingEffectiveness = tamingEffectiveness;
