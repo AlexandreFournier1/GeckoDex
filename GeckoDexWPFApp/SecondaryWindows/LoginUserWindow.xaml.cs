@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeckoDexUserManager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,14 +48,48 @@ namespace GeckoDexWPFApp.SecondaryWindows
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            // Logique de login ici
-            MessageBox.Show("Connexion tentée...");
+            string username = LoginUsernameBox.Text.Trim();
+            string password = LoginPasswordBox.Password;
+
+            if (UserManager.Login(username, password))
+            {
+                MessageBox.Show("Login successful.");
+                this.DialogResult = true;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password.");
+            }
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            // Logique d'enregistrement ici
-            MessageBox.Show("Enregistrement tenté...");
+            string username = RegisterUsernameBox.Text.Trim();
+            string password = RegisterPasswordBox.Password;
+            string confirm = RegisterConfirmPasswordBox.Password;
+
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Please fill in all fields.");
+                return;
+            }
+
+            if (password != confirm)
+            {
+                MessageBox.Show("Passwords do not match.");
+                return;
+            }
+
+            if (UserManager.Register(username, password))
+            {
+                MessageBox.Show("Registration successful.");
+                SwitchToLogin_Click(null, null);
+            }
+            else
+            {
+                MessageBox.Show("Username already exists.");
+            }
         }
     }
 }

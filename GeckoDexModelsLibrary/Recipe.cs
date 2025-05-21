@@ -1,6 +1,9 @@
-﻿namespace GeckoDexModelsLibrary
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace GeckoDexModelsLibrary
 {
-    public class Recipe
+    public class Recipe : INotifyPropertyChanged
     {
         #region Member variables and properties
 
@@ -9,7 +12,14 @@
         public List<Component> Components
         {
             get { return _components; }
-            set { _components = value; }
+            set
+            {
+                if (_components != value)
+                {
+                    _components = value;
+                    NotifyPropertyChanged();
+                }
+            }
         }
 
         #endregion
@@ -22,6 +32,20 @@
         }
 
         public Recipe() : this(new List<Component>()) { }
+
+        #endregion
+
+        #region INotifyPropertyChanged implementation
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        // This method is called by the Set accessor of each property.  
+        // The CallerMemberName attribute that is applied to the optional propertyName  
+        // parameter causes the property name of the caller to be substituted as an argument.  
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         #endregion
 

@@ -2,6 +2,9 @@
 
 namespace GeckoDexTamingLibrary
 {
+    /// <summary>
+    /// Testing class for TamingCalculator
+    /// </summary>
     // Efficacité : 
     // Efficiency dépend de la nourriture (kibble = 99%, mouton/crops = 75%, autres = 50%)
     // Niveau Bonus = (Efficiency * NombreDeCrocs)

@@ -1,6 +1,9 @@
-﻿namespace GeckoDexModelsLibrary.AbstractClass
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace GeckoDexModelsLibrary.AbstractClass
 {
-    public abstract class GameObject
+    public abstract class GameObject : INotifyPropertyChanged
     {
         #region Member variables and properties
 
@@ -12,25 +15,53 @@
         public int Id
         {
             get { return _id; }
-            set { _id = value; }
+            set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+                    NotifyPropertyChanged();
+                }
+            }
         }
 
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    NotifyPropertyChanged();
+                }
+            }
         }
 
         public string Description
         {
             get { return _description; }
-            set { _description = value; }
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    NotifyPropertyChanged();
+                }
+            }
         }
 
         public string ImagePath
         {
             get { return _imagePath; }
-            set { _imagePath = value; }
+            set
+            {
+                if (_imagePath != value)
+                {
+                    _imagePath = value;
+                    NotifyPropertyChanged();
+                }
+            }
         }
 
         #endregion
@@ -47,8 +78,17 @@
 
         #endregion
 
-        #region Abstract Methods
+        #region INotifyPropertyChanged implementation
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        // This method is called by the Set accessor of each property.  
+        // The CallerMemberName attribute that is applied to the optional propertyName  
+        // parameter causes the property name of the caller to be substituted as an argument.  
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         #endregion
     }

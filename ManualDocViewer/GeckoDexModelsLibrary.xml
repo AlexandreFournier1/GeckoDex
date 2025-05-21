@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="template.xsl"?>
+<doc>
+    <assembly>
+        <name>GeckoDexModelsLibrary</name>
+    </assembly>
+    <members>
+        <member name="F:GeckoDexModelsLibrary.Boss._arena">
+            <summary>
+            Class representing a Boss in the game.
+            </summary>
+        </member>
+    </members>
+</doc>

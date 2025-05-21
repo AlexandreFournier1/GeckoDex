@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="template.xsl"?>
+<doc>
+    <assembly>
+        <name>GeckoDexTamingLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:GeckoDexTamingLibrary.TamingCalculator">
+            <summary>
+            Testing class for TamingCalculator
+            </summary>
+        </member>
+    </members>
+</doc>

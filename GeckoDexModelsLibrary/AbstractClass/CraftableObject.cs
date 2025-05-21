@@ -1,6 +1,9 @@
-﻿namespace GeckoDexModelsLibrary.AbstractClass
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace GeckoDexModelsLibrary.AbstractClass
 {
-    public abstract class CraftableObject : GameObject
+    public abstract class CraftableObject : GameObject, INotifyPropertyChanged
     {
         #region Member variables and properties
 
@@ -9,7 +12,14 @@
         public Recipe Recipe
         {
             get { return _recipe; }
-            set { _recipe = value; }
+            set
+            {
+                if (_recipe != value)
+                {
+                    _recipe = value;
+                    NotifyPropertyChanged();
+                }
+            }
         }
 
         #endregion
@@ -19,6 +29,20 @@
         protected CraftableObject(int id, string name, string description, string imagePath, Recipe recipe) : base(id, name, description, imagePath)
         {
             Recipe = recipe;
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged implementation
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        // This method is called by the Set accessor of each property.  
+        // The CallerMemberName attribute that is applied to the optional propertyName  
+        // parameter causes the property name of the caller to be substituted as an argument.  
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

@@ -1,9 +1,12 @@
 ﻿using GeckoDexModelsLibrary.AbstractClass;
 using GeckoDexModelsLibrary.Interfaces;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using static GeckoDexModelsLibrary.Component;
 
 namespace GeckoDexModelsLibrary
 {
-    public class Food : GameObject, IFood
+    public class Food : GameObject, IFood, INotifyPropertyChanged
     {
         #region Member variables and properties
 
@@ -14,33 +17,97 @@ namespace GeckoDexModelsLibrary
         public int TamingEffectiveness
         {
             get { return _tamingEffectiveness; }
-            set { _tamingEffectiveness = value; }
+            set
+            {
+                if (_tamingEffectiveness != value)
+                {
+                    _tamingEffectiveness = value;
+                    NotifyPropertyChanged();
+                }
+            }
         }
 
         public int FoodPoints
         {
             get { return _foodPoints; }
-            set { _foodPoints = value; }
+            set
+            {
+                if (_foodPoints != value)
+                {
+                    _foodPoints = value;
+                    NotifyPropertyChanged();
+                }
+            }
         }
 
         public CategoryFood CategoryFood
         {
             get { return _categoryFood; }
-            set { _categoryFood = value; }
+            set
+            {
+                if (_categoryFood != value)
+                {
+                    _categoryFood = value;
+                    NotifyPropertyChanged();
+                }
+            }
         }
 
         #endregion
 
         #region Constructors
 
-        public Food(int id, string name, string description, string imagePath, int tamingEffectiveness, int foodPoints, CategoryFood categoryFood) : base(id, name, description, imagePath)
+        public Food(FoodBuilder builder) : base(builder.Id, builder.Name, builder.Description, builder.ImagePath)
         {
-            TamingEffectiveness = tamingEffectiveness;
-            FoodPoints = foodPoints;
-            CategoryFood = categoryFood;
+            TamingEffectiveness = builder.TamingEffectiveness;
+            FoodPoints = builder.FoodPoints;
+            CategoryFood = builder.CategoryFood;
         }
 
-        public Food() : this(0, "undefined", "undefined", "undefined", 0, 0, CategoryFood.Undefined) { }
+        public Food() : this(new FoodBuilder()) { }
+
+        #endregion
+
+        #region Builder
+
+        public class FoodBuilder
+        {
+            // Champs hérités de GameObject
+            public int Id { get; private set; } = 0;
+            public string Name { get; private set; } = "undefined";
+            public string Description { get; private set; } = "undefined";
+            public string ImagePath { get; private set; } = "undefined";
+
+            // Champs spécifiques à Food
+            public int TamingEffectiveness { get; private set; } = 0;
+            public int FoodPoints { get; private set; } = 0;
+            public CategoryFood CategoryFood { get; private set; } = CategoryFood.Undefined;
+
+            // Setters pour créer un objet Food
+            public FoodBuilder SetId(int id) { Id = id; return this; }
+            public FoodBuilder SetName(string name) { Name = name; return this; }
+            public FoodBuilder SetDescription(string description) { Description = description; return this; }
+            public FoodBuilder SetImagePath(string path) { ImagePath = path; return this; }
+            public FoodBuilder SetTamingEffectiveness(int tamingEffectiveness) {TamingEffectiveness = tamingEffectiveness; return this; }
+            public FoodBuilder SetFoodPoints(int foodPoints) { FoodPoints = foodPoints; return this; }
+            public FoodBuilder SetCategoryFood(CategoryFood categoryFood) { CategoryFood = categoryFood; return this; }
+
+            public Food Build() => new Food(this);
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged implementation
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        // This method is called by the Set accessor of each property.  
+        // The CallerMemberName attribute that is applied to the optional propertyName  
+        // parameter causes the property name of the caller to be substituted as an argument.  
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         #endregion
 

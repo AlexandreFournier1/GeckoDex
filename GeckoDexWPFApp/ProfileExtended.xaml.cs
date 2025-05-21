@@ -35,10 +35,10 @@ namespace GeckoDexWPFApp
         private void LoadTamings()
         {
             // Exemple temporaire
-            var testDino = new Dinosaure(1, "Raptor", "Images/raptor.png", new Statistics(), TypeFoodSupply.Carnivore, CategoryFood.RawMeat, new Narcotic(), 10, 600, TypeCreature.Terestrial);
-            Tamings.Add(new TamingEntry(testDino, "00:12:34", 12));
+            //var testDino = new Dinosaure(1, "Raptor", "Images/raptor.png", new Statistics(), TypeFoodSupply.Carnivore, CategoryFood.RawMeat, new Narcotic(), 10, 600, TypeCreature.Terestrial);
+            //Tamings.Add(new TamingEntry(testDino, "00:12:34", 12));
 
-            TamingList.ItemsSource = Tamings;
+            //TamingList.ItemsSource = Tamings;
         }
 
         private void ChangeProfileImage_Click(object sender, RoutedEventArgs e)
