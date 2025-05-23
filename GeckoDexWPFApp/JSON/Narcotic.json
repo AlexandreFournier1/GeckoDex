@@ -4,6 +4,7 @@
     "Name": "Narcotic",
     "Description": "Increases your health, but puts you to sleep.",
     "ImagePath": null,
+    "Torpidity": 40,
     "Recipe": {
       "Components": [
         {

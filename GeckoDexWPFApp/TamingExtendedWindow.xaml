@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GeckoDexWPFApp"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="TamingExtendedWindow" Height="500" Width="800"
+        Title="TamingExtendedWindow" Height="500" Width="900"
         Background="#FFFFF0B3">
     <Window.Resources>
         <Style TargetType="Button">

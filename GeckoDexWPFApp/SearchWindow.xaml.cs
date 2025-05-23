@@ -1,4 +1,5 @@
-﻿using GeckoDexWPFApp.SecondaryWindows;
+﻿using GeckoDexUserManager;
+using GeckoDexWPFApp.SecondaryWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,10 +34,32 @@ namespace GeckoDexWPFApp
 
         private void UserButton_Click(object sender, RoutedEventArgs e)
         {
-            LoginUserWindow userWindow = new LoginUserWindow();
-            userWindow.Owner = this;
-            userWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            userWindow.ShowDialog(); // modal
+            if (SessionManager.IsLoggedIn)
+            {
+                // Déjà connecté → ouvrir le profil
+                ProfileExtended profile = new ProfileExtended();
+                profile.Owner = this;
+                profile.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                profile.ShowDialog();
+            }
+            else
+            {
+                // Pas connecté → demander login
+                LoginUserWindow loginWindow = new LoginUserWindow();
+                loginWindow.Owner = this;
+                loginWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
+                bool? result = loginWindow.ShowDialog(); // modal
+
+                if (result == true && SessionManager.IsLoggedIn)
+                {
+                    // Connexion réussie → ouvrir profil
+                    ProfileExtended profile = new ProfileExtended();
+                    profile.Owner = this;
+                    profile.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    profile.ShowDialog();
+                }
+            }
         }
     }
 }

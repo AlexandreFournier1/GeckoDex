@@ -51,8 +51,11 @@ namespace GeckoDexWPFApp.SecondaryWindows
             string username = LoginUsernameBox.Text.Trim();
             string password = LoginPasswordBox.Password;
 
-            if (UserManager.Login(username, password))
+            var user = UserManager.LoadUsers().FirstOrDefault(u => u.Username == username && u.Password == password);
+
+            if (user != null)
             {
+                SessionManager.CurrentUser = user;
                 MessageBox.Show("Login successful.");
                 this.DialogResult = true;
                 this.Close();

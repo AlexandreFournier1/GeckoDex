@@ -4,7 +4,7 @@ namespace GeckoDexUserManager
 {
     public class UserManager
     {
-        private static string filePath = "../GeckoDexWPFApp/JSON/Users/users.json";
+        private static string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Users", "users.json");
 
         public static List<User> LoadUsers()
         {

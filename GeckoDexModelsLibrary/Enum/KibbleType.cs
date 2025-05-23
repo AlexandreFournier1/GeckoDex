@@ -4,9 +4,10 @@
     {
         Undefined,
         Basic,
-        Special,
-        Exceptional,
+        Simple,
+        Regular,
         Superior,
-        Legendary
+        Exceptional,
+        Extraordinary
     }
 }

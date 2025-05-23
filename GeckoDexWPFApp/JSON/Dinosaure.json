@@ -1,45 +1,9 @@
-﻿/* 
-  Code des différents identifiants : 
-  - 100 à 199 = Dinosaures
-    - T-Rex = 100
-  - 200 à 299 = Consommables
-    - Focal Chili = 200
-    - Rare Flower = 201
-    - Spoiled Meat = 202
-    - Cooked Meat = 203
-    - Cooked Fish Meat = 204
-    - Rockarrot = 205
-    - Cooked Meat Jerky = 206 
-    - Longrass = 207
-    - Savoroot = 208
-    - Prime Meat Jerky = 209
-    - Citronal = 210
-    - Rare Mushroom = 211
-    - Giant Bee Honey = 212
-    - Lazarus Chowder = 213
-  - 300 à 399 = Items
-    - Fiber = 300
-    - Sap = 301
-  - 400 à 499 = Kibble
-    - Basic = 400
-    - Simple = 401
-    - Regular = 402
-    - Superior = 403
-    - Exceptional = 404
-    - Extraordinary = 405
-  - 500 à 599 = Narcotic --> Se limiter à ça
-    - Narcotic = 500
-  - 600 à 699 = Berry
-    - Narcoberry = 600
-    - Mejoberry = 601
-    - Amarberry = 602
-    - Tintoberry = 603
-*/
-[
+﻿[
   {
     "Id": 100,
     "Name": "T-Rex",
-    "ImagePath": "C:\\Cours Supérieure\\BAC 2\\Q2\\C#\\FinalProject_AlexandreFournierD202\\GeckoDexWPFApp\\Img\\Dinosaure\\Rex.png",
+    "ImagePath": "/Img/Dinosaure/Rex.png",
+    "Description": "The Tyrannosaurus Rex is a large carnivorous dinosaur that lived during the late Cretaceous period. It is known for its massive size, powerful jaws, and sharp teeth. The T-Rex was one of the largest land predators of its time and is often depicted as a fearsome creature in popular culture.",
     "Statistics": {
       "Health": 1100,
       "Stamina": 420,
@@ -54,13 +18,14 @@
     "CategoryFood": "RawMutton",
     "KibbleId": 404,
     "NarcoticId": 500,
-    "NarcoticAmount": 0, // On va dire 1 narco pour 10 min
-    "TamingTime": 614 // Temps en secondes
+    "NarcoticAmount": 0,
+    "TamingTime": 614
   },
   {
     "Id": 101,
     "Name": "Pteranodon",
-    "ImagePath": "C:\\Cours Supérieure\\BAC 2\\Q2\\C#\\FinalProject_AlexandreFournierD202\\GeckoDexWPFApp\\Img\\Dinosaure\\Pteranodon.png",
+    "ImagePath": "/Img/Dinosaure/Pteranodon.png",
+    "Description": "The Pteranodon is a genus of pterosaur that lived during the late Cretaceous period. It is known for its large wingspan and distinctive crest on its head. Pteranodons were flying reptiles, not dinosaurs, and are often depicted as soaring over the prehistoric landscape.",
     "Statistics": {
       "Health": 210,
       "Stamina": 150,
@@ -76,12 +41,13 @@
     "KibbleId": 402,
     "NarcoticId": 500,
     "NarcoticAmount": 0,
-    "TamingTime": 256 // Temps en secondes
+    "TamingTime": 256
   },
   {
     "Id": 102,
     "Name": "Triceratops",
-    "ImagePath": null,
+    "ImagePath": "/Img/Dinosaure/Triceratops.png",
+    "Description": "The Triceratops is a genus of herbivorous dinosaur that lived during the late Cretaceous period. It is known for its three distinctive facial horns and large bony frill at the back of its head. Triceratops was one of the largest ceratopsians and is often depicted as a formidable herbivore.",
     "Statistics": {
       "Health": 375,
       "Stamina": 150,
@@ -97,12 +63,13 @@
     "KibbleId": 401,
     "NarcoticId": 500,
     "NarcoticAmount": 0,
-    "TamingTime": 144 // Temps en secondes
+    "TamingTime": 144
   },
   {
     "Id": 103,
     "Name": "Raptor",
-    "ImagePath": null,
+    "ImagePath": "/Img/Dinosaure/Raptor.png",
+    "Description": "The Raptor is a genus of small to medium-sized carnivorous dinosaur that lived during the late Cretaceous period. It is known for its sharp claws and agility. Raptors are often depicted as pack hunters, using their speed and intelligence to hunt down prey.",
     "Statistics": {
       "Health": 200,
       "Stamina": 150,
@@ -118,12 +85,13 @@
     "KibbleId": 401,
     "NarcoticId": 500,
     "NarcoticAmount": 0,
-    "TamingTime": 86 // Temps en secondes
+    "TamingTime": 86
   },
   {
     "Id": 104,
     "Name": "Argentavis",
-    "ImagePath": null,
+    "ImagePath": "/Img/Dinosaure/Argentavis.png",
+    "Description": "The Argentavis is a genus of large bird-like dinosaur that lived during the late Cretaceous period. It is known for its impressive wingspan and predatory nature. Argentavis was one of the largest flying birds and is often depicted as a powerful aerial predator.",
     "Statistics": {
       "Health": 365,
       "Stamina": 400,
@@ -139,12 +107,13 @@
     "KibbleId": 403,
     "NarcoticId": 500,
     "NarcoticAmount": 0,
-    "TamingTime": 461 // Temps en secondes
+    "TamingTime": 461
   },
   {
     "Id": 105,
     "Name": "Brontosaurus",
-    "ImagePath": null,
+    "ImagePath": "/Img/Dinosaure/Brontosaurus.png",
+    "Description": "The Brontosaurus is a genus of large herbivorous dinosaur that lived during the late Jurassic period. It is known for its long neck and massive size. Brontosaurus was one of the largest land animals and is often depicted as a gentle giant, feeding on vegetation in prehistoric landscapes.",
     "Statistics": {
       "Health": 2070,
       "Stamina": 240,
@@ -160,12 +129,13 @@
     "KibbleId": 404,
     "NarcoticId": 500,
     "NarcoticAmount": 0,
-    "TamingTime": 430 // Temps en secondes
+    "TamingTime": 430
   },
   {
     "Id": 106,
     "Name": "Giganotosaurus",
-    "ImagePath": null,
+    "ImagePath": "/Img/Dinosaure/Giganotosaurus.png",
+    "Description": "The Giganotosaurus is a genus of large carnivorous dinosaur that lived during the late Cretaceous period. It is known for its massive size and powerful jaws. Giganotosaurus was one of the largest land predators and is often depicted as a fearsome hunter in prehistoric environments.",
     "Statistics": {
       "Health": 80000,
       "Stamina": 400,
@@ -181,12 +151,13 @@
     "KibbleId": 404,
     "NarcoticId": 500,
     "NarcoticAmount": 1,
-    "TamingTime": 921 // Temps en secondes
+    "TamingTime": 921
   },
   {
     "Id": 107,
     "Name": "Stegosaurus",
-    "ImagePath": null,
+    "ImagePath": "/Img/Dinosaure/Stegosaurus.png",
+    "Description": "The Stegosaurus is a genus of herbivorous dinosaur that lived during the late Jurassic period. It is known for its distinctive double row of large bony plates along its back and its spiked tail. Stegosaurus was one of the most recognizable dinosaurs and is often depicted as a slow-moving herbivore.",
     "Statistics": {
       "Health": 650,
       "Stamina": 300,
@@ -202,16 +173,17 @@
     "KibbleId": 402,
     "NarcoticId": 500,
     "NarcoticAmount": 0,
-    "TamingTime": 307 // Temps en secondes
+    "TamingTime": 307
   },
   {
     "Id": 108,
     "Name": "Mosasaurus",
-    "ImagePath": null,
+    "ImagePath": "/Img/Dinosaure/Mosasaurus.png",
+    "Description": "The Mosasaurus is a genus of large marine reptile that lived during the late Cretaceous period. It is known for its massive size and predatory nature. Mosasaurus was one of the largest marine predators and is often depicted as a fearsome hunter in prehistoric oceans.",
     "Statistics": {
       "Health": 3600,
       "Stamina": 400,
-      "Oxygen": -1, // -1 = pas de besoin d'oxygène
+      "Oxygen": -1,
       "Food": 8000,
       "Weight": 1300,
       "Speed": 100,
@@ -223,12 +195,13 @@
     "KibbleId": 404,
     "NarcoticId": 500,
     "NarcoticAmount": 0,
-    "TamingTime": 569 // Temps en secondes
+    "TamingTime": 569
   },
   {
     "Id": 109,
     "Name": "Spinosaurus",
-    "ImagePath": null,
+    "ImagePath": "/Img/Dinosaure/Spinosaurus.png",
+    "Description": "The Spinosaurus is a genus of large carnivorous dinosaur that lived during the late Cretaceous period. It is known for its distinctive sail-like structure on its back and its semi-aquatic lifestyle. Spinosaurus was one of the largest land predators and is often depicted as a formidable hunter in both land and water.",
     "Statistics": {
       "Health": 700,
       "Stamina": 350,
@@ -244,6 +217,6 @@
     "KibbleId": 404,
     "NarcoticId": 500,
     "NarcoticAmount": 1,
-    "TamingTime": 826 // Temps en secondes
+    "TamingTime": 826
   }
 ]

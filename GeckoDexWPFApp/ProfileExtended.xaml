@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GeckoDexWPFApp"
         mc:Ignorable="d"
-        Title="ProfileExtended" Height="450" Width="800"
+        Title="ProfileExtended" Height="500" Width="900"
         Background="#FFFFF0B3">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
@@ -19,7 +19,7 @@
         <StackPanel Grid.Column="0" Margin="10">
             <Border>
                 <Image x:Name="ProfileImage"
-                   Source="Img/User.png"
+                   Source="{Binding CurrentUser.ImagePath}"
                    Height="150"
                    Width="150"
                    Stretch="UniformToFill"
@@ -32,14 +32,21 @@
                 BorderBrush="#FF5E330A"/>
 
             <TextBlock x:Name="UsernameTextBlock"
-                   Text="Nom d'utilisateur"
+                   Text="{Binding CurrentUser.Username}"
                    FontWeight="Bold"
                    FontSize="16"
                    Foreground="#FF5E330A"
-                   Margin="0,0,0,5"/>
+                   Margin="0,0,0,5"
+                    />
             <TextBlock x:Name="EmailTextBlock"
-                   Text="adresse@mail.com"
+                   Text="{Binding CurrentUser.Email}"
                    Foreground="#FF5E330A"/>
+            <Button Content="Se déconnecter"
+                Click="Logout_Click"
+                Background="#FFD16F1E"
+                Foreground="White"
+                BorderBrush="#FF5E330A"
+                Margin="0,20,0,0"/>
         </StackPanel>
 
         <!-- === Taming en cours === -->

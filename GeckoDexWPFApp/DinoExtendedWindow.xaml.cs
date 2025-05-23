@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeckoDexModelsLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,10 @@ namespace GeckoDexWPFApp
     /// </summary>
     public partial class DinoExtendedWindow : Window
     {
-        public DinoExtendedWindow(string dinoName)
+        public DinoExtendedWindow(Dinosaure dino)
         {
             InitializeComponent();
-            Title = $"Details for {dinoName}";
+            Title = $"Details for {dino.Name}";
         }
 
         private void BreedingButton_Click(object sender, RoutedEventArgs e)

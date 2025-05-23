@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GeckoDexWPFApp"
         mc:Ignorable="d"
-        Title="GeckoDex Search" Height="450" Width="800"
+        Title="GeckoDex Search" Height="500" Width="900"
         Background="#FFFFF0B3">
     <Grid>
         <!-- Définition de la Grid -->

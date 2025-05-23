@@ -14,18 +14,40 @@
   <ItemGroup>
     <None Remove="Img\CatalogueButton.png" />
     <None Remove="Img\ClipBoardButton.png" />
+    <None Remove="Img\Dinosaure\Argentavis.png" />
+    <None Remove="Img\Dinosaure\Brontosaurus.png" />
+    <None Remove="Img\Dinosaure\Giganotosaurus.png" />
+    <None Remove="Img\Dinosaure\Mosasaurus.png" />
     <None Remove="Img\Dinosaure\Pteranodon.png" />
+    <None Remove="Img\Dinosaure\Raptor.png" />
     <None Remove="Img\Dinosaure\Rex.png" />
+    <None Remove="Img\Dinosaure\Spinosaurus.png" />
+    <None Remove="Img\Dinosaure\Stegosaurus.png" />
     <None Remove="Img\Dinosaure\Triceratops.png" />
     <None Remove="Img\MemoButton.png" />
     <None Remove="Img\NoteBookButton.png" />
     <None Remove="Img\SearchButton.png" />
     <None Remove="Img\User.png" />
+    <None Remove="JSON\Dinosaure.json" />
+    <None Remove="JSON\Kibble.json" />
+    <None Remove="JSON\Narcotic.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="JSON\Dinosaure.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="JSON\Kibble.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="JSON\Narcotic.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Img\ClipBoardButton.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
@@ -36,28 +58,49 @@
 
   <ItemGroup>
     <Resource Include="Img\CatalogueButton.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Argentavis.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Brontosaurus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Giganotosaurus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Mosasaurus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\Dinosaure\Pteranodon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Raptor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\Dinosaure\Rex.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Spinosaurus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Stegosaurus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\Dinosaure\Triceratops.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\MemoButton.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\NoteBookButton.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\SearchButton.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\User.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
