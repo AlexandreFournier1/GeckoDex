@@ -27,17 +27,17 @@
         <StackPanel x:Name="RegisterPanel" VerticalAlignment="Center" Visibility="Collapsed" HorizontalAlignment="Center" MinWidth="200" Width="Auto">
             <TextBlock Text="Register" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,10" Foreground="#FF5E330A"/>
 
-            <!-- Label et champ Username -->
+            <!-- Username -->
             <TextBlock Text="Username" Foreground="#FF5E330A" Margin="0,5"/>
             <TextBox x:Name="RegisterUsernameBox" Margin="0,5"/>
 
-            <!-- Label et champ Password -->
+            <!-- Password -->
             <TextBlock Text="Password" Foreground="#FF5E330A" Margin="0,5"/>
             <PasswordBox x:Name="RegisterPasswordBox" Margin="0,5"/>
 
-            <!-- Label et champ Confirm Password -->
-            <TextBlock Text="Confirm Password" Foreground="#FF5E330A" Margin="0,5"/>
-            <PasswordBox x:Name="RegisterConfirmPasswordBox" Margin="0,5"/>
+            <!-- Email -->
+            <TextBlock Text="Email" Foreground="#FF5E330A" Margin="0,5"/>
+            <TextBox x:Name="RegisterEmailBox" Margin="0,5"/>
 
             <Button x:Name="ConfirmRegisterButton" Content="Register" Margin="0,10,0,5" Click="RegisterButton_Click" Background="#FFD16F1E" BorderBrush="#FF5E330A"/>
             <Button x:Name="SwitchToLogin" Content="Back to Login" Click="SwitchToLogin_Click" Background="#FFD16F1E" BorderBrush="#FF5E330A"/>

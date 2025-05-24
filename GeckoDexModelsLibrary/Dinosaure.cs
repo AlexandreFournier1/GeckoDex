@@ -97,7 +97,7 @@ namespace GeckoDexModelsLibrary
 
         #region Constructors
 
-        private Dinosaure(DinosaureBuilder builder) : base(builder.Id, builder.Name, builder.ImagePath, builder.Statistics, builder.TypeCreature)
+        private Dinosaure(DinosaureBuilder builder) : base(builder.Id, builder.Name, builder.ImagePath, builder.Description, builder.Statistics, builder.TypeCreature)
         {
             TypeFoodSupply = builder.TypeFoodSupply;
             PreferedFood = builder.PreferedFood;
@@ -119,6 +119,7 @@ namespace GeckoDexModelsLibrary
             public int Id { get; private set; } = 0;
             public string Name { get; private set; } = "undefined";
             public string ImagePath { get; private set; } = "undefined";
+            public string Description { get; private set; } = "undefined";
             public Statistics Statistics { get; private set; } = new Statistics();
             public TypeCreature TypeCreature { get; private set; } = TypeCreature.Undefined;
 
@@ -134,6 +135,7 @@ namespace GeckoDexModelsLibrary
             public DinosaureBuilder SetId(int id) { Id = id; return this; }
             public DinosaureBuilder SetName(string name) { Name = name; return this; }
             public DinosaureBuilder SetImagePath(string path) { ImagePath = path; return this; }
+            public DinosaureBuilder SetDescription(string description) { Description = description; return this; }
             public DinosaureBuilder SetStatistics(Statistics stats) { Statistics = stats; return this; }
             public DinosaureBuilder SetTypeCreature(TypeCreature type) { TypeCreature = type; return this; }
 

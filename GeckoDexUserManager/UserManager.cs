@@ -22,12 +22,22 @@ namespace GeckoDexUserManager
             File.WriteAllText(filePath, json);
         }
 
-        public static bool Register(string username, string password)
+        public static bool Register(string username, string password, string email)
         {
             var users = LoadUsers();
-            if (users.Any(u => u.Username == username)) return false;
 
-            users.Add(new User { Username = username, Password = password });
+            if (users.Any(u => u.Username == username))
+                return false;
+
+            User newUser = new User
+            {
+                Username = username,
+                Password = password,
+                Email = email,
+                ImagePath = "Img/User.png"
+            };
+
+            users.Add(newUser);
             SaveUsers(users);
             return true;
         }

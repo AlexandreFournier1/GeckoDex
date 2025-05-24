@@ -20,9 +20,16 @@ namespace GeckoDexWPFApp
     /// </summary>
     public partial class DinoExtendedWindow : Window
     {
+        TamingEntry tamingEntry;
+
         public DinoExtendedWindow(Dinosaure dino)
         {
             InitializeComponent();
+
+            DataContext = dino;
+
+            tamingEntry = new TamingEntry(dino, dino.TamingTime.ToString(), 1);
+
             Title = $"Details for {dino.Name}";
         }
 
@@ -33,7 +40,7 @@ namespace GeckoDexWPFApp
 
         private void TamingButton_Click(object sender, RoutedEventArgs e)
         {
-            TamingExtendedWindow tamingExtendedWindow = new TamingExtendedWindow();
+            TamingExtendedWindow tamingExtendedWindow = new TamingExtendedWindow(tamingEntry);
             tamingExtendedWindow.Show();
             this.Close();
         }

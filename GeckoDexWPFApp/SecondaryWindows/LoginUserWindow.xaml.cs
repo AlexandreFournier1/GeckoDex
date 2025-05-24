@@ -43,7 +43,6 @@ namespace GeckoDexWPFApp.SecondaryWindows
             // Optionnel : effacer les champs
             RegisterUsernameBox.Text = "";
             RegisterPasswordBox.Password = "";
-            RegisterConfirmPasswordBox.Password = "";
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -70,21 +69,15 @@ namespace GeckoDexWPFApp.SecondaryWindows
         {
             string username = RegisterUsernameBox.Text.Trim();
             string password = RegisterPasswordBox.Password;
-            string confirm = RegisterConfirmPasswordBox.Password;
+            string email = RegisterEmailBox.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(email))
             {
                 MessageBox.Show("Please fill in all fields.");
                 return;
             }
 
-            if (password != confirm)
-            {
-                MessageBox.Show("Passwords do not match.");
-                return;
-            }
-
-            if (UserManager.Register(username, password))
+            if (UserManager.Register(username, password, email))
             {
                 MessageBox.Show("Registration successful.");
                 SwitchToLogin_Click(null, null);

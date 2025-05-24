@@ -16,9 +16,9 @@
         <!-- Colonne gauche avec image + nom dans une seule bordure -->
         <Border Grid.Column="0" Background="#FFFFCC80" BorderBrush="#FF5E330A" BorderThickness="2" Margin="10">
             <StackPanel>
-                <Image Source="/Img/Dinosaure/Rex.png" Margin="10"/>
+                <Image Source="{Binding ImagePath}" Margin="10"/>
 
-                <TextBlock Text="Tyrannosaurus Rex"
+                <TextBlock Text="{Binding Name}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            FontSize="16"
@@ -43,40 +43,51 @@
         <!-- Colonne droite avec description-->
         <Border Grid.Column="1" Background="#FFFFD9A6" BorderBrush="#FF5E330A" BorderThickness="2" Margin="10">
             <StackPanel>
-                <TextBlock Text="Description: The Tyrannosaurus Rex is one of the largest carnivorous dinosaurs."
-                           HorizontalAlignment="Left"
+                <TextBlock HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
                            Foreground="#FF5E330A"
-                           Padding="10"/>
+                           Padding="10"
+                           TextWrapping="Wrap">
+                    <Run Text="Description : "/>
+                    <Run Text="{Binding Description}"/>
+                </TextBlock>
                 
-                <TextBlock Text="Food Supply: Carnivore"
-                           HorizontalAlignment="Left"
+                <TextBlock HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontSize="14"
                            Foreground="#FF5E330A"
-                           Padding="10"/>
+                           Padding="10">
+                    <Run Text="Food Supply : "/>
+                    <Run Text="{Binding TypeFoodSupply}"/>
+                </TextBlock>
 
-                <TextBlock Text="Habitat: Forests and Plains"
-                            HorizontalAlignment="Left"
+                <TextBlock HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontSize="14"
                             Foreground="#FF5E330A"
-                            Padding="10"/>
+                            Padding="10">
+                    <Run Text="Preferred Food : "/>
+                    <Run Text="{Binding PreferedFood}"/>
+                </TextBlock>
 
-                <TextBlock Text="Abilities: Strong bite, fast runner"
-                            HorizontalAlignment="Left"
+                <TextBlock HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Foreground="#FF5E330A"
+                        Padding="10">
+                <Run Text="Prefered Kibble : "/>
+                <Run Text="{Binding PreferedKibble.Name}"/>
+                </TextBlock>
+
+                <TextBlock HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontSize="14"
                             Foreground="#FF5E330A"
-                            Padding="10"/>
-
-                <TextBlock Text="Notes: The T-Rex is known for its powerful jaws and keen sense of smell."
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            FontSize="14"
-                            Foreground="#FF5E330A"
-                            Padding="10"/>
+                            Padding="10">
+                    <Run Text="Type Creature : "/>
+                    <Run Text="{Binding TypeCreature}"/>
+                </TextBlock>
             </StackPanel>
         </Border>
     </Grid>

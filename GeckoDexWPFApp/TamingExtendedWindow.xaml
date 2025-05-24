@@ -33,8 +33,21 @@
 
             <!-- ComboBox niveau -->
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                <TextBlock Text="Level:" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,5,0" Foreground="#FF5E330A"/>
-                <ComboBox x:Name="LevelComboBox" Width="80" IsEditable="True"/>
+                <Button Width="50" Height="30"
+                    VerticalAlignment="Center"
+                    ToolTip="Recharger les statistiques"
+                    Click="ReloadStats_Click"
+                    Background="Transparent"
+                    BorderBrush="{x:Null}">
+                    <Image Source="Img/Reload.png" Stretch="Uniform"/>
+                </Button>
+
+                <TextBlock Text="Level:" VerticalAlignment="Center" FontWeight="Bold" Margin="5,0" Foreground="#FF5E330A"/>
+
+                <ComboBox x:Name="LevelComboBox"
+                  Width="80"
+                  IsEditable="True"
+                  SelectionChanged="LoadTamedStatistics"/>
             </StackPanel>
         </DockPanel>
 
@@ -90,7 +103,8 @@
                             <ComboBox x:Name="TamingFoodComboBox" Width="150" 
                               Foreground="#FF5E330A" 
                               Background="#FFFFE0B2"
-                              DisplayMemberPath="."/>
+                              DisplayMemberPath="."
+                              SelectionChanged="LoadTamingTime"/>
                         </StackPanel>
 
                         <TextBlock x:Name="TamingTimeTextBlock" Text="Temps d'apprivoisement : --:--" Margin="3" Foreground="#FF5E330A"/>

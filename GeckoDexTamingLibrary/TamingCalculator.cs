@@ -28,110 +28,96 @@ namespace GeckoDexTamingLibrary
     // --> Kibble c'est x5 de rapidité | Mouton/Crops c'est x3 de rapidité | Autres c'est x1 de rapidité
     // --> De base lvl 1 : les dinos ont une BaseAmount de 100 et le BaseMultiplicateur de 0.5
     // --> 1 de narco pour 10 min (600 sec) de taming
-    public class TamingCalculator
+    public static class TamingCalculator
     {
-        public float CalculateEfficiency(Food food)
+        public static float CalculateEfficiency(CategoryFood categoryFood)
         {
-            if (food is null) return -1;
-
             float efficiency;
 
-            if (food.isKibble()) efficiency = 0.99f;
-            else if (food.CategoryFood == CategoryFood.RawMutton || food.CategoryFood == CategoryFood.Vegetables) efficiency = 0.75f;
+            if (categoryFood == CategoryFood.Kibble) efficiency = 0.99f;
+            else if (categoryFood == CategoryFood.RawMutton || categoryFood == CategoryFood.Vegetables) efficiency = 0.75f;
             else efficiency = 0.5f;
 
             return efficiency;
         }
 
-        public int CalculatetotalPointFoodNeeded(Food food, int dinoLevel)
+        public static int CalculatetotalPointFoodNeeded(CategoryFood categoryFood, int dinoLevel)
         {
-            if (food is null) return -1;
-
             int totalPointFoodNeeded;
             int baseAmount = 100;
             double baseMultiplicator = 0.5;
             int multiplicator = 1;
 
-            if (food.isKibble()) multiplicator = 5;
-            else if (food.CategoryFood == CategoryFood.RawMutton || food.CategoryFood == CategoryFood.Vegetables) multiplicator = 3;
+            if (categoryFood == CategoryFood.Kibble) multiplicator = 5;
+            else if (categoryFood == CategoryFood.RawMutton || categoryFood == CategoryFood.Vegetables) multiplicator = 3;
 
             totalPointFoodNeeded = (int)((baseAmount * dinoLevel) / (baseMultiplicator * multiplicator));
 
             return totalPointFoodNeeded;
         }
 
-        public int CalculateBitesAmount(Food food, int dinoLevel)
+        public static int CalculateBitesAmount(CategoryFood categoryFood, int dinoLevel)
         {
-            if (food is null) return -1;
-
             int totalBitesAmount;
-            int totalPointFoodNeeded = CalculatetotalPointFoodNeeded(food, dinoLevel);
+            int totalPointFoodNeeded = CalculatetotalPointFoodNeeded(categoryFood, dinoLevel);
             int foodAmountByBite = 50;
 
-            if (food.isKibble()) foodAmountByBite = 80;
+            if (categoryFood == CategoryFood.Kibble) foodAmountByBite = 80;
 
             totalBitesAmount = totalPointFoodNeeded / foodAmountByBite;
 
             return totalBitesAmount;
         }
 
-        public int CalculateTimeBetweenBite(Food food)
+        public static int CalculateTimeBetweenBite(CategoryFood categoryFood)
         {
-            if (food is null) return -1;
-
             int timeBetweenBite;
             int foodAmountByBite = 50;
 
-            if (food.isKibble()) foodAmountByBite = 80;
+            if (categoryFood == CategoryFood.Kibble) foodAmountByBite = 80;
 
             timeBetweenBite = foodAmountByBite * 5;
 
             return timeBetweenBite;
         }
 
-        public int CalculateBonusLevel(Food food, int dinoLevel)
+        public static int CalculateBonusLevel(CategoryFood categoryFood, int dinoLevel)
         {
-            if (food is null) return -1;
-
             int level = 0;
-            float efficiency = CalculateEfficiency(food);
-            int totalBitesAmount = CalculateBitesAmount(food, dinoLevel);
+            float efficiency = CalculateEfficiency(categoryFood);
+            int totalBitesAmount = CalculateBitesAmount(categoryFood, dinoLevel);
 
             level = (int)efficiency * totalBitesAmount;
 
             return level;
         }
 
-        public int CalculateTotalTamingTime(Food food, int dinoLevel)
+        public static int CalculateTotalTamingTime(CategoryFood categoryFood, int dinoLevel)
         {
-            if (food is null) return -1;
-
             int totalTamingTime = 0;
-            int bitesAmount = CalculateBitesAmount(food, dinoLevel);
-            int timeBetweenBite = CalculateTimeBetweenBite(food);
+            int bitesAmount = CalculateBitesAmount(categoryFood, dinoLevel);
+            int timeBetweenBite = CalculateTimeBetweenBite(categoryFood);
 
             totalTamingTime = bitesAmount * timeBetweenBite;
 
             return totalTamingTime;
         }
 
-        public int CalculateNarcoticsNeeded(Food food, int dinoLevel)
+        public static int CalculateNarcoticsNeeded(CategoryFood categoryFood, int dinoLevel)
         {
-            if (food is null) return -1;
-
             int narcoticsNeeded = 0;
-            int totalTamingTime = CalculateTotalTamingTime(food, dinoLevel);
+            int totalTamingTime = CalculateTotalTamingTime(categoryFood, dinoLevel);
 
             narcoticsNeeded = totalTamingTime / 600;
 
             return narcoticsNeeded;
         }
 
-        public Statistics CalculateStatAfterTaming(Statistics oldStatistics, Food food)
+        public static Statistics CalculateStatAfterTaming(Statistics oldStatistics, CategoryFood categoryFood)
         {
             Statistics newStatistics = new Statistics();
             
-            float efficiency = CalculateEfficiency(food);
+            float efficiency = CalculateEfficiency(categoryFood);
             float TamingBonusMultiplier = (float)(0.5 * (efficiency * 100));
 
             newStatistics.Health = (int)(oldStatistics.Health * (1 + TamingBonusMultiplier) / 10);

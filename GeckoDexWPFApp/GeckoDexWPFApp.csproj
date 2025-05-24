@@ -26,6 +26,7 @@
     <None Remove="Img\Dinosaure\Triceratops.png" />
     <None Remove="Img\MemoButton.png" />
     <None Remove="Img\NoteBookButton.png" />
+    <None Remove="Img\Reload.png" />
     <None Remove="Img\SearchButton.png" />
     <None Remove="Img\User.png" />
     <None Remove="JSON\Dinosaure.json" />
@@ -53,6 +54,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GeckoDexModelsLibrary\GeckoDexModelsLibrary.csproj" />
+    <ProjectReference Include="..\GeckoDexTamingLibrary\GeckoDexTamingLibrary.csproj" />
     <ProjectReference Include="..\GeckoDexUserManager\GeckoDexUserManager.csproj" />
   </ItemGroup>
 
@@ -94,6 +96,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\NoteBookButton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Reload.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\SearchButton.png">

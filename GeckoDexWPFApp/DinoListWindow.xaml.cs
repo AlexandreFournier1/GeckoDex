@@ -38,13 +38,15 @@ namespace GeckoDexWPFApp
         {
             if (sender is Border border && border.DataContext is Dinosaure dino)
             {
+                MessageBox.Show($"Tu as cliqué sur : {dino.Name}");
+
                 DinoExtendedWindow dinoExtendedWindow = new DinoExtendedWindow(dino);
                 dinoExtendedWindow.Show();
                 this.Close();
             }
         }
 
-        public Border CreateDinoRectangle(Dinosaure dino, string description)
+        public Border CreateDinoRectangle(Dinosaure dino)
         {
             // Texte de la description
             var nameBlock = new TextBlock
@@ -57,9 +59,9 @@ namespace GeckoDexWPFApp
                 VerticalAlignment = VerticalAlignment.Center
             };
 
-            var descBlock = new TextBlock
+            var typeBlock = new TextBlock
             {
-                Text = $"- Description: {description}",
+                Text = $"- Type Creature: {dino.TypeCreature}",
                 FontSize = 14,
                 Foreground = new BrushConverter().ConvertFrom("#FF5E330A") as Brush,
                 Padding = new Thickness(5),
@@ -93,8 +95,8 @@ namespace GeckoDexWPFApp
                 BorderBrush = new BrushConverter().ConvertFrom("#FF5E330A") as Brush,
                 Child = nameBlock
             });
-            Grid.SetRow(descBlock, 1);
-            textGrid.Children.Add(descBlock);
+            Grid.SetRow(typeBlock, 1);
+            textGrid.Children.Add(typeBlock);
             Grid.SetRow(foodBlock, 2);
             textGrid.Children.Add(foodBlock);
 
@@ -254,6 +256,7 @@ namespace GeckoDexWPFApp
                     .SetId(dino.GetProperty("Id").GetInt32())
                     .SetName(dino.GetProperty("Name").GetString())
                     .SetImagePath(dino.GetProperty("ImagePath").GetString())
+                    .SetDescription(dino.GetProperty("Description").GetString())
                     .SetStatistics(statistics)
                     .SetTypeCreature(Enum.Parse<TypeCreature>(dino.GetProperty("TypeCreature").GetString()))
                     .SetTypeFoodSupply(Enum.Parse<TypeFoodSupply>(dino.GetProperty("TypeFoodSupply").GetString()))
@@ -270,7 +273,7 @@ namespace GeckoDexWPFApp
             // === Création visuelle ===
             foreach (var d in dinosaures)
             {
-                var rectangle = CreateDinoRectangle(d, "d.Description");
+                var rectangle = CreateDinoRectangle(d);
                 ListDinoStackPanel.Children.Add(rectangle);
             }
         }

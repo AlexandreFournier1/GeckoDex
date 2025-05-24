@@ -10,6 +10,7 @@ namespace GeckoDexModelsLibrary.AbstractClass
         private int _id;
         private string _name;
         private string _imagePath;
+        private string _description;
         private Statistics _statistics;
         private TypeCreature _typeCreature;
 
@@ -52,6 +53,19 @@ namespace GeckoDexModelsLibrary.AbstractClass
             }
         }
 
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public Statistics Statistics
         {
             get { return _statistics; }
@@ -82,11 +96,12 @@ namespace GeckoDexModelsLibrary.AbstractClass
 
         #region Constructors
 
-        protected Creature(int id, string name, string imagePath, Statistics statistics, TypeCreature typeCreature)
+        protected Creature(int id, string name, string imagePath, string description, Statistics statistics, TypeCreature typeCreature)
         {
             Id = id;
             Name = name;
             ImagePath = imagePath;
+            Description = description;
             Statistics = statistics;
             TypeCreature = typeCreature;
         }

@@ -1,5 +1,7 @@
 ﻿using GeckoDexModelsLibrary;
+using GeckoDexTamingLibrary;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace GeckoDexWPFApp
 {
@@ -8,20 +10,32 @@ namespace GeckoDexWPFApp
     /// </summary>
     public partial class TamingExtendedWindow : Window
     {
-        private TamingEntry _tamingEntry;
+        public TamingEntry TamingEntry { get; set; }
 
         public TamingExtendedWindow(TamingEntry entry)
         {
             InitializeComponent();
             PopulateLevelComboBox();
-            _tamingEntry = entry;
 
-            // Tu peux maintenant utiliser l'objet pour préremplir les champs si besoin
-            this.Title = $"Taming - {_tamingEntry.Dinosaure.Name}";
+            TamingEntry = entry;
 
-            LoadBaseStatistics(entry.Dinosaure.Statistics);
-            LoadTamedStatistics(entry.Dinosaure.Statistics);
+            DataContext = TamingEntry;
+
+            Title = $"Taming - {TamingEntry.Dinosaure.Name}";
+
             LoadCategoryFoodComboBox();
+            LoadBaseStatistics(entry.Dinosaure.Statistics);
+
+            TamingFoodComboBoxStat.SelectedItem = CategoryFood.Undefined;
+            TamingFoodComboBox.SelectedItem = CategoryFood.Undefined;
+
+            TamingFoodComboBoxStat.Text = "Select Food Category";
+            TamingFoodComboBox.Text = "Select Food Category";
+
+            TamingFoodComboBoxStat.IsEditable = true;
+            TamingFoodComboBox.IsEditable = true;
+            TamingFoodComboBoxStat.IsTextSearchEnabled = true;
+            TamingFoodComboBox.IsTextSearchEnabled = true;
         }
 
         public TamingExtendedWindow() : this(new TamingEntry()) { }
@@ -43,39 +57,41 @@ namespace GeckoDexWPFApp
             TamingFoodComboBox.SelectedItem = CategoryFood.Undefined;
         }
 
-        private void LoadBaseStatistics(Statistics stats)
+        private Statistics LoadBaseStatistics(Statistics stats)
         {
+            int selectedLevel = 1;
+
+            if (LevelComboBox.SelectedItem is int lvl)
+                selectedLevel = lvl;
+            else if (int.TryParse(LevelComboBox.Text, out int parsed))
+                selectedLevel = parsed;
+
+            double multiplier = 1 + (selectedLevel - 1) * 0.125;
+
             var statStrings = new List<string>
             {
-                $"Health: {stats.Health}",
-                $"Stamina: {stats.Stamina}",
-                $"Oxygen: {stats.Oxygen}",
-                $"Food: {stats.Food}",
-                $"Weight: {stats.Weight}",
-                $"Speed: {stats.Speed}%",
-                $"Strength: {stats.Strength}"
+                $"Health: {(int)(stats.Health * multiplier)}",
+                $"Stamina: {(int)(stats.Stamina * multiplier)}",
+                $"Oxygen: {(int)(stats.Oxygen * multiplier)}",
+                $"Food: {(int)(stats.Food * multiplier)}",
+                $"Weight: {(int)(stats.Weight * multiplier)}",
+                $"Speed: {(int)(stats.Speed * multiplier)}%",
+                $"Strength: {(int)(stats.Strength * multiplier)}"
             };
 
             BaseStatsItemsControl.ItemsSource = statStrings;
-        }
 
-        // --------------- A changer ---------------
-        private void LoadTamedStatistics(Statistics stats)
-        {
-            var tamedStats = new List<string>
+            return new Statistics
             {
-                $"Health: {stats.Health * 10}",
-                $"Stamina: {stats.Stamina * 10}",
-                $"Oxygen: {stats.Oxygen * 10}",
-                $"Food: {stats.Food * 10}",
-                $"Weight: {stats.Weight * 10}",
-                $"Speed: {stats.Speed + 10}%",
-                $"Strength: {stats.Strength * 10}"
+                Health = (int)(stats.Health * multiplier),
+                Stamina = (int)(stats.Stamina * multiplier),
+                Oxygen = (int)(stats.Oxygen * multiplier),
+                Food = (int)(stats.Food * multiplier),
+                Weight = (int)(stats.Weight * multiplier),
+                Speed = (int)(stats.Speed * multiplier),
+                Strength = (int)(stats.Strength * multiplier)
             };
-
-            TamedStatsItemsControl.ItemsSource = tamedStats;
         }
-        // ------------------------------------------
 
         private void StatisticsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -87,11 +103,86 @@ namespace GeckoDexWPFApp
         {
             StatisticsPanel.Visibility = Visibility.Collapsed;
             TamingPanel.Visibility = Visibility.Visible;
+
+            LoadTamingTime();
         }
 
         private void AddTamingToProfile_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Taming added to profile", "Information Message", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        private void LoadTamedStatistics(object sender, SelectionChangedEventArgs e)
+        {
+            int selectedLevel = 1;
+
+            if (LevelComboBox.SelectedItem is int lvl)
+            {
+                selectedLevel = lvl;
+            }
+            else if (int.TryParse(LevelComboBox.Text, out int parsed))
+            {
+                selectedLevel = parsed;
+            }
+
+            if (TamingFoodComboBoxStat.SelectedItem is CategoryFood categoryFood)
+            {
+                Statistics newStats = TamingCalculator.CalculateStatAfterTaming(LoadBaseStatistics(TamingEntry.Dinosaure.Statistics), categoryFood);
+
+                var tamedStats = new List<string>
+                    {
+                        $"Health: {newStats.Health}",
+                        $"Stamina: {newStats.Stamina}",
+                        $"Oxygen: {newStats.Oxygen}",
+                        $"Food: {newStats.Food}",
+                        $"Weight: {newStats.Weight}",
+                        $"Speed: {newStats.Speed}%",
+                        $"Strength: {newStats.Strength}"
+                    };
+
+                TamedStatsItemsControl.ItemsSource = tamedStats;
+            }
+        }
+
+        private void LoadTamingTime()
+        {
+            if (TamingFoodComboBox.SelectedItem is CategoryFood foodCategory)
+            {
+                int selectedLevel = 1;
+
+                if (LevelComboBox.SelectedItem is int lvl)
+                {
+                    selectedLevel = lvl;
+                }
+                else if (int.TryParse(LevelComboBox.Text, out int parsed))
+                {
+                    selectedLevel = parsed;
+                }
+
+                int totalBites = TamingCalculator.CalculateBitesAmount(foodCategory, selectedLevel);
+                int timeBetweenBite = TamingCalculator.CalculateTimeBetweenBite(foodCategory);
+                int totalTime = totalBites * timeBetweenBite;
+                TimeSpan timeSpan = TimeSpan.FromSeconds(totalTime);
+                string formattedTime = $"{timeSpan.Hours:D2}:{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
+                TamingTimeTextBlock.Text = $"Total Taming Time: {formattedTime}";
+            }
+            else
+            {
+                TamingTimeTextBlock.Text = "Select a valid food category.";
+            }
+        }
+
+        private void LoadTamingTime(object sender, SelectionChangedEventArgs e)
+        {
+            LoadTamingTime();
+        }
+
+        private void ReloadStats_Click(object sender, RoutedEventArgs e)
+        {
+            LoadBaseStatistics(TamingEntry.Dinosaure.Statistics);
+            LoadTamedStatistics(null, null);
+            LoadTamingTime();
+        }
+
     }
 }

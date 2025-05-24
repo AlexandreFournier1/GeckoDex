@@ -62,23 +62,18 @@ namespace GeckoDexWPFApp
             InitializeComponent();
             DataContext = this;
 
-            //CurrentUser = SessionManager.CurrentUser ?? new User { Username = "Invité", ImagePath = "Img/User.png" };
+            CurrentUser = SessionManager.CurrentUser;
 
-            //// Charger l'image de profil
-            //string imagePath = CurrentUser.ImagePath;
+            if (File.Exists(CurrentUser.ImagePath))
+            {
+                ProfileImage.Source = new BitmapImage(new Uri(CurrentUser.ImagePath));
+            }
+            else
+            {
+                ProfileImage.Source = new BitmapImage(new Uri("Img/User.png", UriKind.Relative));
+            }
 
-            //if (File.Exists(imagePath))
-            //{
-            //    ProfileImage.Source = new BitmapImage(new Uri(imagePath));
-            //}
-            //else
-            //{
-            //    ProfileImage.Source = new BitmapImage(new Uri("Img/User.png", UriKind.Relative));
-            //}
-
-            // Charger les tamings
-
-            LoadTamings(); // Remplir la collection
+            LoadTamings();
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -108,16 +103,32 @@ namespace GeckoDexWPFApp
             {
                 string selectedPath = openFileDialog.FileName;
 
-                // Copie dans le dossier local (par exemple "Images/Profile.jpg")
+                // Destination
                 string appFolder = AppDomain.CurrentDomain.BaseDirectory;
                 string imageFolder = System.IO.Path.Combine(appFolder, "Img");
-                Directory.CreateDirectory(imageFolder); // Crée le dossier s’il n’existe pas
-                string newImagePath = System.IO.Path.Combine(imageFolder, "UserProfile.png");
+                Directory.CreateDirectory(imageFolder);
+
+                string fileName = $"User_{SessionManager.CurrentUser.Username}.png";
+                string newImagePath = System.IO.Path.Combine(imageFolder, fileName);
 
                 File.Copy(selectedPath, newImagePath, true);
 
-                // Charge la nouvelle image
+                // Mise à jour visuelle
                 ProfileImage.Source = new BitmapImage(new Uri(newImagePath));
+
+                // Mise à jour de la session
+                SessionManager.CurrentUser.ImagePath = newImagePath;
+
+                // Mise à jour du fichier utilisateur
+                var users = UserManager.LoadUsers();
+                var user = users.FirstOrDefault(u => u.Username == SessionManager.CurrentUser.Username);
+                if (user != null)
+                {
+                    user.ImagePath = newImagePath;
+                    UserManager.SaveUsers(users);
+                }
+
+                MessageBox.Show("Image de profil mise à jour !");
             }
         }
 
