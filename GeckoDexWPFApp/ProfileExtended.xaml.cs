@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +19,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace GeckoDexWPFApp
 {
@@ -55,6 +57,8 @@ namespace GeckoDexWPFApp
             }
         }
 
+        private DispatcherTimer _timer;
+
         public ObservableCollection<TamingEntry> Tamings { get; set; } = new ObservableCollection<TamingEntry>();
 
         public ProfileExtended()
@@ -73,7 +77,26 @@ namespace GeckoDexWPFApp
                 ProfileImage.Source = new BitmapImage(new Uri("Img/User.png", UriKind.Relative));
             }
 
-            LoadTamings();
+            //LoadTamings();
+            TamingCountTextBlock.Text = $"Nombre de taming : {LoadTamings()}";
+
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            _timer.Tick += (s, e) =>
+            {
+                foreach (var taming in Tamings)
+                    taming.NotifyPropertyChanged(nameof(TamingEntry.FormattedTime));
+            };
+            _timer.Start();
+        }
+
+        private string GetUserTamingFilePath()
+        {
+            string folder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Tamings");
+            Directory.CreateDirectory(folder);
+            return System.IO.Path.Combine(folder, $"{CurrentUser.Username}.json");
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -83,13 +106,35 @@ namespace GeckoDexWPFApp
             this.Close();
         }
 
-        private void LoadTamings()
+        private int LoadTamings()
         {
-            // Exemple temporaire
-            //var testDino = new Dinosaure(1, "Raptor", "Images/raptor.png", new Statistics(), TypeFoodSupply.Carnivore, CategoryFood.RawMeat, new Narcotic(), 10, 600, TypeCreature.Terestrial);
-            //Tamings.Add(new TamingEntry(testDino, "00:12:34", 12));
+            int tamingCount = 0;
 
-            //TamingList.ItemsSource = Tamings;
+            string path = GetUserTamingFilePath();
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                var entries = JsonSerializer.Deserialize<List<TamingEntry>>(json);
+                if (entries != null)
+                {
+                    Tamings.Clear();
+                    foreach (var t in entries)
+                    {
+                        Tamings.Add(t);
+                        tamingCount++;
+                    }  
+                }
+            }
+
+            //TamingCountTextBlock.Text = $"Nombre de taming : {tamingCount}";
+
+            return tamingCount;
+        }
+
+        public void SaveTamings()
+        {
+            string json = JsonSerializer.Serialize(Tamings.ToList(), new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(GetUserTamingFilePath(), json);
         }
 
         private void ChangeProfileImage_Click(object sender, RoutedEventArgs e)
@@ -146,6 +191,58 @@ namespace GeckoDexWPFApp
             if (sender is Button btn && btn.CommandParameter is TamingEntry entry)
             {
                 Tamings.Remove(entry);
+                SaveTamings();
+            }
+        }
+
+        private void ExportTamings_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Filter = "Fichier JSON (*.json)|*.json",
+                FileName = $"Tamings_{CurrentUser.Username}.json"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                string json = JsonSerializer.Serialize(Tamings.ToList(), new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(dialog.FileName, json);
+                MessageBox.Show("Tamings exportés avec succès.", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void ImportTamings_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                Filter = "Fichier JSON (*.json)|*.json"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                string json = File.ReadAllText(dialog.FileName);
+                var importedTamings = JsonSerializer.Deserialize<List<TamingEntry>>(json);
+
+                if (importedTamings != null)
+                {
+                    int added = 0;
+
+                    foreach (var entry in importedTamings)
+                    {
+                        if (!Tamings.Contains(entry))
+                        {
+                            Tamings.Add(entry);
+                            added++;
+                        }
+                    }
+
+                    SaveTamings();
+                    MessageBox.Show($"{added} taming(s) importé(s) avec succès.", "Import", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Le fichier est vide ou invalide.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }

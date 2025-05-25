@@ -9,8 +9,21 @@ namespace GeckoDexWPFApp
         #region Member variables and properties
 
         private Dinosaure _dinosaure;
-        private string _remainingTime;
+        private int _remainingTime;
         private int _dinoLevel;
+
+        public DateTime StartTime { get; set; } = DateTime.Now;
+
+        public string FormattedTime
+        {
+            get
+            {
+                int secondsLeft = RemainingTime - (int)(DateTime.Now - StartTime).TotalSeconds;
+                return secondsLeft > 0
+                    ? TimeSpan.FromSeconds(secondsLeft).ToString(@"hh\:mm\:ss")
+                    : "Taming Finished";
+            }
+        }
 
         public Dinosaure Dinosaure
         {
@@ -25,7 +38,7 @@ namespace GeckoDexWPFApp
             }
         }
 
-        public string RemainingTime
+        public int RemainingTime
         { 
             get { return _remainingTime; } 
             set
@@ -55,14 +68,14 @@ namespace GeckoDexWPFApp
 
         #region Constructors
 
-        public TamingEntry(Dinosaure dinosaure, string remainingTime, int dinoLevel)
+        public TamingEntry(Dinosaure dinosaure, int remainingTime, int dinoLevel)
         {
             Dinosaure = dinosaure;
             RemainingTime = remainingTime;
             DinoLevel = dinoLevel;
         }
 
-        public TamingEntry() : this (new Dinosaure(), "00:00", 1) {}
+        public TamingEntry() : this (new Dinosaure(), 0, 1) {}
 
         #endregion
 
@@ -73,11 +86,24 @@ namespace GeckoDexWPFApp
         // This method is called by the Set accessor of each property.  
         // The CallerMemberName attribute that is applied to the optional propertyName  
         // parameter causes the property name of the caller to be substituted as an argument.  
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        public void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion
+
+        public override bool Equals(object obj)
+        {
+            return obj is TamingEntry other &&
+                   Dinosaure.Name == other.Dinosaure.Name &&
+                   DinoLevel == other.DinoLevel;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Dinosaure.Name, DinoLevel);
+        }
+
     }
 }

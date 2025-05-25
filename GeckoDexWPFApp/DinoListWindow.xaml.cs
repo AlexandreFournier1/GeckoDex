@@ -38,8 +38,6 @@ namespace GeckoDexWPFApp
         {
             if (sender is Border border && border.DataContext is Dinosaure dino)
             {
-                MessageBox.Show($"Tu as cliqué sur : {dino.Name}");
-
                 DinoExtendedWindow dinoExtendedWindow = new DinoExtendedWindow(dino);
                 dinoExtendedWindow.Show();
                 this.Close();

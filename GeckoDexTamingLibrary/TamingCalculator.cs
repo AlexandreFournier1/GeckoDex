@@ -30,13 +30,13 @@ namespace GeckoDexTamingLibrary
     // --> 1 de narco pour 10 min (600 sec) de taming
     public static class TamingCalculator
     {
-        public static float CalculateEfficiency(CategoryFood categoryFood)
+        public static int CalculateEfficiency(CategoryFood categoryFood)
         {
-            float efficiency;
+            int efficiency;
 
-            if (categoryFood == CategoryFood.Kibble) efficiency = 0.99f;
-            else if (categoryFood == CategoryFood.RawMutton || categoryFood == CategoryFood.Vegetables) efficiency = 0.75f;
-            else efficiency = 0.5f;
+            if (categoryFood == CategoryFood.Kibble) efficiency = 99;
+            else if (categoryFood == CategoryFood.RawMutton || categoryFood == CategoryFood.Vegetables) efficiency = 75;
+            else efficiency = 50;
 
             return efficiency;
         }
@@ -84,12 +84,12 @@ namespace GeckoDexTamingLibrary
         public static int CalculateBonusLevel(CategoryFood categoryFood, int dinoLevel)
         {
             int level = 0;
-            float efficiency = CalculateEfficiency(categoryFood);
+            int efficiency = CalculateEfficiency(categoryFood);
             int totalBitesAmount = CalculateBitesAmount(categoryFood, dinoLevel);
 
-            level = (int)efficiency * totalBitesAmount;
+            level = efficiency * totalBitesAmount;
 
-            return level;
+            return level / 100;
         }
 
         public static int CalculateTotalTamingTime(CategoryFood categoryFood, int dinoLevel)
@@ -117,16 +117,16 @@ namespace GeckoDexTamingLibrary
         {
             Statistics newStatistics = new Statistics();
             
-            float efficiency = CalculateEfficiency(categoryFood);
-            float TamingBonusMultiplier = (float)(0.5 * (efficiency * 100));
+            int efficiency = CalculateEfficiency(categoryFood);
+            float TamingBonusMultiplier = (float)(0.15 * efficiency);
 
-            newStatistics.Health = (int)(oldStatistics.Health * (1 + TamingBonusMultiplier) / 10);
-            newStatistics.Stamina = (int)(oldStatistics.Stamina * (1 + TamingBonusMultiplier) / 10);
-            newStatistics.Oxygen = (int)(oldStatistics.Oxygen * (1 + TamingBonusMultiplier) / 10);
-            newStatistics.Food = (int)(oldStatistics.Food * (1 + TamingBonusMultiplier) / 10);
-            newStatistics.Weight = (int)(oldStatistics.Weight * (1 + TamingBonusMultiplier) / 10);
-            newStatistics.Speed = (int)(oldStatistics.Speed * (1 + TamingBonusMultiplier) / 10);
-            newStatistics.Strength = (int)(oldStatistics.Strength * (1 + TamingBonusMultiplier) / 10);
+            newStatistics.Health = (int)(oldStatistics.Health * (1 + TamingBonusMultiplier) / 15);
+            newStatistics.Stamina = (int)(oldStatistics.Stamina * (1 + TamingBonusMultiplier) / 15);
+            newStatistics.Oxygen = (int)(oldStatistics.Oxygen * (1 + TamingBonusMultiplier) / 15);
+            newStatistics.Food = (int)(oldStatistics.Food * (1 + TamingBonusMultiplier) / 15);
+            newStatistics.Weight = (int)(oldStatistics.Weight * (1 + TamingBonusMultiplier) / 15);
+            newStatistics.Speed = (int)(oldStatistics.Speed * (1 + TamingBonusMultiplier) / 15);
+            newStatistics.Strength = (int)(oldStatistics.Strength * (1 + TamingBonusMultiplier) / 15);
 
             return newStatistics;
         }

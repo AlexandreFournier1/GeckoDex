@@ -104,7 +104,7 @@
                               Foreground="#FF5E330A" 
                               Background="#FFFFE0B2"
                               DisplayMemberPath="."
-                              SelectionChanged="LoadTamingTime"/>
+                              SelectionChanged="LoadTaming"/>
                         </StackPanel>
 
                         <TextBlock x:Name="TamingTimeTextBlock" Text="Temps d'apprivoisement : --:--" Margin="3" Foreground="#FF5E330A"/>

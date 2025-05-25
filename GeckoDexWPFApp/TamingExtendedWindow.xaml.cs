@@ -1,5 +1,7 @@
 ﻿using GeckoDexModelsLibrary;
 using GeckoDexTamingLibrary;
+using GeckoDexUserManager;
+using GeckoDexWPFApp.SecondaryWindows;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -75,7 +77,7 @@ namespace GeckoDexWPFApp
                 $"Oxygen: {(int)(stats.Oxygen * multiplier)}",
                 $"Food: {(int)(stats.Food * multiplier)}",
                 $"Weight: {(int)(stats.Weight * multiplier)}",
-                $"Speed: {(int)(stats.Speed * multiplier)}%",
+                $"Speed: {stats.Speed}%",
                 $"Strength: {(int)(stats.Strength * multiplier)}"
             };
 
@@ -88,7 +90,7 @@ namespace GeckoDexWPFApp
                 Oxygen = (int)(stats.Oxygen * multiplier),
                 Food = (int)(stats.Food * multiplier),
                 Weight = (int)(stats.Weight * multiplier),
-                Speed = (int)(stats.Speed * multiplier),
+                Speed = (int)(stats.Speed),
                 Strength = (int)(stats.Strength * multiplier)
             };
         }
@@ -104,12 +106,71 @@ namespace GeckoDexWPFApp
             StatisticsPanel.Visibility = Visibility.Collapsed;
             TamingPanel.Visibility = Visibility.Visible;
 
-            LoadTamingTime();
+            LoadTaming(sender, null);
         }
 
         private void AddTamingToProfile_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Taming added to profile", "Information Message", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (!SessionManager.IsLoggedIn)
+            {
+                var loginWindow = new LoginUserWindow
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+
+                bool? result = loginWindow.ShowDialog();
+                if (result != true || !SessionManager.IsLoggedIn)
+                {
+                    MessageBox.Show("Vous devez être connecté pour ajouter un taming.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
+
+            // Récupérer le niveau
+            int selectedLevel = 1;
+            if (LevelComboBox.SelectedItem is int lvl)
+                selectedLevel = lvl;
+            else if (int.TryParse(LevelComboBox.Text, out int parsed))
+                selectedLevel = parsed;
+
+            int tamingTime = LoadTamingTime();
+
+            // Mettre à jour l'entrée
+            TamingEntry.DinoLevel = selectedLevel;
+            TamingEntry.RemainingTime = tamingTime;
+            TamingEntry.StartTime = DateTime.Now;
+
+            // 🔍 Vérifier s'il y a déjà une fenêtre ouverte
+            var profile = Application.Current.Windows
+                .OfType<ProfileExtended>()
+                .FirstOrDefault();
+
+            if (profile != null)
+            {
+                // ✅ Ajouter uniquement si non déjà présent (prévenir doublon)
+                bool alreadyExists = profile.Tamings.Any(t =>
+                    t.Dinosaure.Name == TamingEntry.Dinosaure.Name &&
+                    t.DinoLevel == TamingEntry.DinoLevel);
+
+                if (!alreadyExists)
+                {
+                    profile.Tamings.Add(TamingEntry);
+                    profile.SaveTamings();
+                }
+
+                profile.Activate();
+            }
+            else
+            {
+                // Si la fenêtre n'est pas ouverte, on la crée et l'ouvre avec le taming
+                var newProfile = new ProfileExtended();
+                newProfile.Tamings.Add(TamingEntry);
+                newProfile.SaveTamings();
+                newProfile.Show();
+            }
+
+            MessageBox.Show("Taming ajouté au profil.");
         }
 
         private void LoadTamedStatistics(object sender, SelectionChangedEventArgs e)
@@ -144,10 +205,18 @@ namespace GeckoDexWPFApp
             }
         }
 
-        private void LoadTamingTime()
+        private int LoadTamingTime()
         {
+            int time = 0;
+
             if (TamingFoodComboBox.SelectedItem is CategoryFood foodCategory)
             {
+                if (foodCategory == CategoryFood.Undefined)
+                {
+                    TamingTimeTextBlock.Text = "Total Taming Time: --:--";
+                    return time;
+                }
+
                 int selectedLevel = 1;
 
                 if (LevelComboBox.SelectedItem is int lvl)
@@ -165,23 +234,78 @@ namespace GeckoDexWPFApp
                 TimeSpan timeSpan = TimeSpan.FromSeconds(totalTime);
                 string formattedTime = $"{timeSpan.Hours:D2}:{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
                 TamingTimeTextBlock.Text = $"Total Taming Time: {formattedTime}";
+
+                time = totalTime;
             }
-            else
+
+            return time;
+        }
+
+        private void LoadTamingEfficiency()
+        {
+            if (TamingFoodComboBox.SelectedItem is CategoryFood foodCategory)
             {
-                TamingTimeTextBlock.Text = "Select a valid food category.";
+                if (foodCategory == CategoryFood.Undefined)
+                {
+                    TamingTimeTextBlock.Text = "Taming Efficiency: --%";
+                    return;
+                }
+
+                int selectedLevel = 1;
+
+                if (LevelComboBox.SelectedItem is int lvl)
+                {
+                    selectedLevel = lvl;
+                }
+                else if (int.TryParse(LevelComboBox.Text, out int parsed))
+                {
+                    selectedLevel = parsed;
+                }
+                int efficiency = TamingCalculator.CalculateEfficiency(foodCategory);
+                
+                TamingEfficiencyTextBlock.Text = $"Taming Efficiency: {efficiency}%";
             }
         }
 
-        private void LoadTamingTime(object sender, SelectionChangedEventArgs e)
+        private void LoadFinalLevel()
+        {
+            if (TamingFoodComboBox.SelectedItem is CategoryFood foodCategory)
+            {
+                if (foodCategory == CategoryFood.Undefined)
+                {
+                    TamingLevelTextBlock.Text = "Final Level: --";
+                    return;
+                }
+
+                int selectedLevel = 1;
+
+                if (LevelComboBox.SelectedItem is int lvl)
+                {
+                    selectedLevel = lvl;
+                }
+                else if (int.TryParse(LevelComboBox.Text, out int parsed))
+                {
+                    selectedLevel = parsed;
+                }
+
+                int bonusLevel = TamingCalculator.CalculateBonusLevel(foodCategory, selectedLevel);
+
+                TamingLevelTextBlock.Text = $"Final Level: {selectedLevel + bonusLevel}";
+            }
+        }
+
+        private void LoadTaming(object sender, SelectionChangedEventArgs e)
         {
             LoadTamingTime();
+            LoadTamingEfficiency();
+            LoadFinalLevel();
         }
 
         private void ReloadStats_Click(object sender, RoutedEventArgs e)
         {
             LoadBaseStatistics(TamingEntry.Dinosaure.Statistics);
             LoadTamedStatistics(null, null);
-            LoadTamingTime();
+            LoadTaming(null, null);
         }
 
     }

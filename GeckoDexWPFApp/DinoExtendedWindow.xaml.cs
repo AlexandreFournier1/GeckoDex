@@ -28,7 +28,7 @@ namespace GeckoDexWPFApp
 
             DataContext = dino;
 
-            tamingEntry = new TamingEntry(dino, dino.TamingTime.ToString(), 1);
+            tamingEntry = new TamingEntry(dino, dino.TamingTime, 1);
 
             Title = $"Details for {dino.Name}";
         }
