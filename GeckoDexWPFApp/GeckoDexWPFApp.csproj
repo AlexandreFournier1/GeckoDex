@@ -12,8 +12,43 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Img\Components\**" />
+    <EmbeddedResource Remove="Img\Components\**" />
+    <None Remove="Img\Components\**" />
+    <Page Remove="Img\Components\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Img\Burger.png" />
     <None Remove="Img\CatalogueButton.png" />
     <None Remove="Img\ClipBoardButton.png" />
+    <None Remove="Img\Component\Amarberry.png" />
+    <None Remove="Img\Component\Basic_Kibble.png" />
+    <None Remove="Img\Component\Citronal.png" />
+    <None Remove="Img\Component\Cooked_Fish_Meat.png" />
+    <None Remove="Img\Component\Cooked_Meat.png" />
+    <None Remove="Img\Component\Cooked_Meat_Jerky.png" />
+    <None Remove="Img\Component\Exceptional_Kibble.png" />
+    <None Remove="Img\Component\Extraordinary_Kibble.png" />
+    <None Remove="Img\Component\Fiber.png" />
+    <None Remove="Img\Component\Focal_Chili.png" />
+    <None Remove="Img\Component\Giant_Bee_Honey.png" />
+    <None Remove="Img\Component\Lazarus_Chowder.png" />
+    <None Remove="Img\Component\Longrass.png" />
+    <None Remove="Img\Component\Mejoberry.png" />
+    <None Remove="Img\Component\Narcoberry.png" />
+    <None Remove="Img\Component\Narcotics.png" />
+    <None Remove="Img\Component\Prime_Meat_Jerky.png" />
+    <None Remove="Img\Component\Rare_Flower.png" />
+    <None Remove="Img\Component\Rare_Mushroom.png" />
+    <None Remove="Img\Component\Regular_Kibble.png" />
+    <None Remove="Img\Component\Rockarrot.png" />
+    <None Remove="Img\Component\Sap.png" />
+    <None Remove="Img\Component\Savoroot.png" />
+    <None Remove="Img\Component\Simple_Kibble.png" />
+    <None Remove="Img\Component\Spoiled_Meat.png" />
+    <None Remove="Img\Component\Superior_Kibble.png" />
+    <None Remove="Img\Component\Tintoberry.png" />
     <None Remove="Img\Dinosaure\Argentavis.png" />
     <None Remove="Img\Dinosaure\Brontosaurus.png" />
     <None Remove="Img\Dinosaure\Giganotosaurus.png" />
@@ -47,6 +82,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Img\Burger.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Img\ClipBoardButton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -60,6 +98,87 @@
 
   <ItemGroup>
     <Resource Include="Img\CatalogueButton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Amarberry.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Basic_Kibble.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Citronal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Cooked_Fish_Meat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Cooked_Meat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Cooked_Meat_Jerky.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Exceptional_Kibble.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Extraordinary_Kibble.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Fiber.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Focal_Chili.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Giant_Bee_Honey.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Lazarus_Chowder.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Longrass.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Mejoberry.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Narcoberry.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Narcotics.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Prime_Meat_Jerky.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Rare_Flower.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Rare_Mushroom.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Regular_Kibble.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Rockarrot.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Sap.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Savoroot.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Simple_Kibble.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Spoiled_Meat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Superior_Kibble.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Component\Tintoberry.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\Dinosaure\Argentavis.png">
@@ -107,10 +226,6 @@
     <Resource Include="Img\User.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Img\Components\" />
   </ItemGroup>
 
 </Project>

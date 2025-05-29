@@ -1,9 +1,12 @@
-﻿using GeckoDexUserManager;
+﻿using GeckoDexModelsLibrary;
+using GeckoDexUserManager;
 using GeckoDexWPFApp.SecondaryWindows;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +16,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static GeckoDexModelsLibrary.Component;
+using static GeckoDexModelsLibrary.Dinosaure;
+using static GeckoDexModelsLibrary.Kibble;
+using static GeckoDexModelsLibrary.Narcotic;
+using static GeckoDexModelsLibrary.Statistics;
 
 namespace GeckoDexWPFApp
 {
@@ -61,5 +69,166 @@ namespace GeckoDexWPFApp
                 }
             }
         }
+
+        private void RecetteButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Ouvre une future fenêtre RecetteWindow (si elle existe)
+            RecipeListWindow window = new RecipeListWindow(); // ou un autre nom de fenêtre
+            window.Owner = this;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            window.ShowDialog();
+        }
+
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = TextSearch.Text.Trim().ToLower();
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                MessageBox.Show("Veuillez entrer un nom de dinosaure.", "Recherche", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            try
+            {
+                string jsonDino = File.ReadAllText("JSON/Dinosaure.json");
+                string jsonKibble = File.ReadAllText("JSON/Kibble.json");
+                string jsonNarco = File.ReadAllText("JSON/Narcotic.json");
+
+                var kibbles = JsonDocument.Parse(jsonKibble).RootElement.EnumerateArray().ToList();
+                var narcos = JsonDocument.Parse(jsonNarco).RootElement.EnumerateArray().ToList();
+                var dinoRoot = JsonDocument.Parse(jsonDino).RootElement;
+
+                foreach (JsonElement dino in dinoRoot.EnumerateArray())
+                {
+                    string dinoName = dino.GetProperty("Name").GetString()?.Trim().ToLower() ?? "";
+
+                    if (dinoName == searchText)
+                    {
+                        int kibbleId = dino.GetProperty("KibbleId").GetInt32();
+                        int narcoticId = dino.GetProperty("NarcoticId").GetInt32();
+
+                        // === Récupérer Kibble et Narcotic ===
+                        Kibble kibble = GetKibbleFromJson(kibbles, kibbleId);
+                        Narcotic narcotic = GetNarcoticFromJson(narcos, narcoticId);
+
+                        // === Statistiques ===
+                        Statistics statistics = new StatisticsBuilder()
+                            .SetHealth(dino.GetProperty("Statistics").GetProperty("Health").GetInt32())
+                            .SetStamina(dino.GetProperty("Statistics").GetProperty("Stamina").GetInt32())
+                            .SetOxygen(dino.GetProperty("Statistics").GetProperty("Oxygen").GetInt32())
+                            .SetFood(dino.GetProperty("Statistics").GetProperty("Food").GetInt32())
+                            .SetWeight(dino.GetProperty("Statistics").GetProperty("Weight").GetInt32())
+                            .SetSpeed(dino.GetProperty("Statistics").GetProperty("Speed").GetInt32())
+                            .SetStrength(dino.GetProperty("Statistics").GetProperty("Strength").GetInt32())
+                            .Build();
+
+                        // === Création de l'objet Dinosaure ===
+                        Dinosaure dinoObj = new DinosaureBuilder()
+                            .SetId(dino.GetProperty("Id").GetInt32())
+                            .SetName(dino.GetProperty("Name").GetString())
+                            .SetImagePath(dino.GetProperty("ImagePath").GetString())
+                            .SetDescription(dino.GetProperty("Description").GetString())
+                            .SetStatistics(statistics)
+                            .SetTypeCreature(Enum.Parse<TypeCreature>(dino.GetProperty("TypeCreature").GetString()))
+                            .SetTypeFoodSupply(Enum.Parse<TypeFoodSupply>(dino.GetProperty("TypeFoodSupply").GetString()))
+                            .SetPreferedFood(Enum.Parse<CategoryFood>(dino.GetProperty("CategoryFood").GetString()))
+                            .SetPreferedKibble(kibble)
+                            .SetNarcoticUsed(narcotic)
+                            .SetNarcoticAmount(dino.GetProperty("NarcoticAmount").GetInt32())
+                            .SetTamingTime(dino.GetProperty("TamingTime").GetInt32())
+                            .Build();
+
+                        // === Affichage de la fenêtre ===
+                        DinoExtendedWindow window = new DinoExtendedWindow(dinoObj);
+                        window.Owner = this;
+                        window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                        window.ShowDialog();
+                        return;
+                    }
+                }
+
+                MessageBox.Show($"Le dinosaure \"{TextSearch.Text}\" n'existe pas.", "Introuvable", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors du chargement des données : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private Kibble GetKibbleFromJson(IEnumerable<JsonElement> kibbles, int kibbleId)
+        {
+            foreach (JsonElement kibb in kibbles)
+            {
+                if (kibb.GetProperty("Id").GetInt32() == kibbleId)
+                {
+                    List<Component> components = new();
+
+                    foreach (JsonElement comp in kibb.GetProperty("Recipe").GetProperty("Components").EnumerateArray())
+                    {
+                        ComponentBuilder compBuilder = new ComponentBuilder()
+                            .SetId(comp.GetProperty("Id").GetInt32())
+                            .SetName(comp.GetProperty("Name").GetString())
+                            .SetQuantity(comp.GetProperty("Quantity").GetInt32())
+                            .SetImagePath(comp.GetProperty("ImagePath").GetString())
+                            .SetDescription(comp.GetProperty("Description").GetString());
+
+                        components.Add(compBuilder.Build());
+                    }
+
+                    Recipe recipe = new Recipe(components);
+
+                    return new KibbleBuilder()
+                        .SetId(kibbleId)
+                        .SetName(kibb.GetProperty("Name").GetString())
+                        .SetDescription(kibb.GetProperty("Description").GetString())
+                        .SetImagePath(kibb.GetProperty("ImagePath").GetString())
+                        .SetRecipe(recipe)
+                        .SetKibbleType(Enum.Parse<KibbleType>(kibb.GetProperty("KibbleType").GetString()))
+                        .SetTamingEffectiveness(kibb.GetProperty("TamingEffectiveness").GetInt32())
+                        .SetFoodPoints(kibb.GetProperty("FoodPoints").GetInt32())
+                        .Build();
+                }
+            }
+
+            return new Kibble();
+        }
+
+        private Narcotic GetNarcoticFromJson(IEnumerable<JsonElement> narcos, int narcoticId)
+        {
+            foreach (JsonElement narco in narcos)
+            {
+                if (narco.GetProperty("Id").GetInt32() == narcoticId)
+                {
+                    List<Component> components = new();
+
+                    foreach (JsonElement comp in narco.GetProperty("Recipe").GetProperty("Components").EnumerateArray())
+                    {
+                        ComponentBuilder compBuilder = new ComponentBuilder()
+                            .SetId(comp.GetProperty("Id").GetInt32())
+                            .SetName(comp.GetProperty("Name").GetString())
+                            .SetQuantity(comp.GetProperty("Quantity").GetInt32())
+                            .SetImagePath(comp.GetProperty("ImagePath").GetString())
+                            .SetDescription(comp.GetProperty("Description").GetString());
+
+                        components.Add(compBuilder.Build());
+                    }
+
+                    Recipe recipe = new Recipe(components);
+
+                    return new NarcoticBuilder()
+                        .SetId(narcoticId)
+                        .SetName(narco.GetProperty("Name").GetString())
+                        .SetDescription(narco.GetProperty("Description").GetString())
+                        .SetImagePath(narco.GetProperty("ImagePath").GetString())
+                        .SetRecipe(recipe)
+                        .SetTorpidity(narco.GetProperty("Torpidity").GetInt32())
+                        .Build();
+                }
+            }
+
+            return new Narcotic();
+        }
+
     }
 }
