@@ -5,15 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GeckoDexWPFApp"
         mc:Ignorable="d"
-        Title="GeckoDex List" Height="500" Width="900"
-        Background="#FFFFF0B3">
-    <Grid>
-        <!-- ScrollViewer pour activer le défilement vertical -->
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <!-- Conteneur principal -->
-            <StackPanel x:Name="ListDinoStackPanel" Margin="10" HorizontalAlignment="Center">
-                <!-- Les rectangles/dinosaures seront ajoutés ici dynamiquement -->
-            </StackPanel>
-        </ScrollViewer>
-    </Grid>
+        Title="GeckoDex List"
+        Height="500"
+        Width="900"
+        Background="#FFFFF0B3"
+        MinHeight="400"
+        MinWidth="600">
+
+    <!-- Scroll global -->
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <!-- Grid extensible -->
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Liste des dinos -->
+            <ItemsControl x:Name="ListDinoItemsControl" Grid.Row="1"
+                          HorizontalAlignment="Stretch">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Grid>
+    </ScrollViewer>
 </Window>

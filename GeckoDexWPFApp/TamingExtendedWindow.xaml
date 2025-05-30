@@ -6,8 +6,14 @@
         xmlns:local="clr-namespace:GeckoDexWPFApp"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="TamingExtendedWindow" Height="500" Width="900"
+        Title="TamingExtendedWindow"
+        Height="500"
+        Width="900"
+        MinHeight="400"
+        MinWidth="700"
+        ResizeMode="CanResize"
         Background="#FFFFF0B3">
+
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5"/>
@@ -18,70 +24,79 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Boutons + ComboBox -->
             <RowDefinition Height="*"/>
-            <!-- Contenu -->
         </Grid.RowDefinitions>
 
-        <!-- Top bar: boutons à gauche + ComboBox à droite -->
-        <DockPanel Grid.Row="0" Margin="0,0,0,10">
+        <!-- TOP: Boutons + ComboBox -->
+        <DockPanel Grid.Row="0" LastChildFill="False">
             <!-- Boutons -->
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                 <Button Content="Statistics" Click="StatisticsButton_Click" Background="#FFD16F1E" BorderBrush="#FF5E330A"/>
                 <Button Content="Taming" Click="TamingButton_Click" Background="#FFD16F1E" BorderBrush="#FF5E330A"/>
             </StackPanel>
 
-            <!-- ComboBox niveau -->
+            <!-- ComboBox + reload -->
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                <Button Width="50" Height="30"
-                    VerticalAlignment="Center"
-                    ToolTip="Recharger les statistiques"
-                    Click="ReloadStats_Click"
-                    Background="Transparent"
-                    BorderBrush="{x:Null}">
+                <Button Width="35" Height="35"
+                        VerticalAlignment="Center"
+                        ToolTip="Recharger les statistiques"
+                        Click="ReloadStats_Click"
+                        Background="Transparent"
+                        BorderBrush="{x:Null}">
                     <Image Source="Img/Reload.png" Stretch="Uniform"/>
                 </Button>
 
-                <TextBlock Text="Level:" VerticalAlignment="Center" FontWeight="Bold" Margin="5,0" Foreground="#FF5E330A"/>
+                <TextBlock Text="Level:"
+                           VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           Margin="5,0"
+                           Foreground="#FF5E330A"/>
 
                 <ComboBox x:Name="LevelComboBox"
-                  Width="80"
-                  IsEditable="True"
-                  SelectionChanged="LoadTamedStatistics"/>
+                          Width="80"
+                          IsEditable="True"
+                          SelectionChanged="LoadTamedStatistics"/>
             </StackPanel>
         </DockPanel>
 
-        <!-- Contenu dynamique -->
+        <!-- CONTENU principal -->
         <Grid Grid.Row="1">
             <!-- STATISTICS -->
-            <Grid x:Name="StatisticsPanel" Visibility="Visible" Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <GroupBox Header="Base Statistics" Margin="0,0,0,10" Foreground="#FF5E330A" BorderBrush="#FF5E330A" BorderThickness="2" Background="#FFFFD9A6">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <ItemsControl x:Name="BaseStatsItemsControl">
+            <ScrollViewer x:Name="StatisticsPanel" Visibility="Visible" Margin="10" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <GroupBox Header="Base Statistics"
+                              Foreground="#FF5E330A"
+                              BorderBrush="#FF5E330A"
+                              BorderThickness="2"
+                              Background="#FFFFD9A6"
+                              Margin="0,0,0,10">
+                        <ItemsControl x:Name="BaseStatsItemsControl" Margin="5">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" Margin="3" Foreground="#FF5E330A"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                    </ScrollViewer>
-                </GroupBox>
+                    </GroupBox>
 
-                <GroupBox Header="Tamed Statistics" Grid.Row="1" Foreground="#FF5E330A" BorderBrush="#FF5E330A" BorderThickness="2" Background="#FFFFD9A6">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
+                    <GroupBox Header="Tamed Statistics"
+                              Foreground="#FF5E330A"
+                              BorderBrush="#FF5E330A"
+                              BorderThickness="2"
+                              Background="#FFFFD9A6">
+                        <StackPanel Margin="5">
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                <TextBlock Text="Food Type:" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="#FF5E330A"/>
-                                <ComboBox x:Name="TamingFoodComboBoxStat" Width="150" 
-                                  Foreground="#FF5E330A" 
-                                  Background="#FFFFE0B2"
-                                  DisplayMemberPath="."/>
-                            </StackPanel> <!-- Faire dynamiquement en créant un objet Statistics -->
+                                <TextBlock Text="Food Type:"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,5,0"
+                                           Foreground="#FF5E330A"/>
+                                <ComboBox x:Name="TamingFoodComboBoxStat"
+                                          Width="150"
+                                          Foreground="#FF5E330A"
+                                          Background="#FFFFE0B2"
+                                          DisplayMemberPath="."/>
+                            </StackPanel>
+
                             <ItemsControl x:Name="TamedStatsItemsControl">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -90,36 +105,54 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </StackPanel>
-                    </ScrollViewer>
-                </GroupBox>
-            </Grid>
+                    </GroupBox>
+                </StackPanel>
+            </ScrollViewer>
 
             <!-- TAMING -->
-            <StackPanel x:Name="TamingPanel" Visibility="Collapsed" Margin="10" Orientation="Vertical" >
-                <GroupBox Header="Taming Information" Foreground="#FF5E330A" BorderBrush="#FF5E330A" BorderThickness="2" Background="#FFFFD9A6">
+            <ScrollViewer x:Name="TamingPanel" Visibility="Collapsed" Margin="10" VerticalScrollBarVisibility="Auto">
+                <GroupBox Header="Taming Information"
+                          Foreground="#FF5E330A"
+                          BorderBrush="#FF5E330A"
+                          BorderThickness="2"
+                          Background="#FFFFD9A6">
                     <StackPanel Margin="5">
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="Food Type:" VerticalAlignment="Center" Margin="0,0,5,0" Foreground="#FF5E330A"/>
-                            <ComboBox x:Name="TamingFoodComboBox" Width="150" 
-                              Foreground="#FF5E330A" 
-                              Background="#FFFFE0B2"
-                              DisplayMemberPath="."
-                              SelectionChanged="LoadTaming"/>
+                            <TextBlock Text="Food Type:"
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,5,0"
+                                       Foreground="#FF5E330A"/>
+                            <ComboBox x:Name="TamingFoodComboBox"
+                                      Width="150"
+                                      Foreground="#FF5E330A"
+                                      Background="#FFFFE0B2"
+                                      DisplayMemberPath="."
+                                      SelectionChanged="LoadTaming"/>
                         </StackPanel>
 
-                        <TextBlock x:Name="TamingTimeTextBlock" Text="Temps d'apprivoisement : --:--" Margin="3" Foreground="#FF5E330A"/>
-                        <TextBlock x:Name="TamingEfficiencyTextBlock" Text="Efficacité : -- %" Margin="3" Foreground="#FF5E330A"/>
-                        <TextBlock x:Name="TamingLevelTextBlock" Text="Niveau final : --" Margin="3" Foreground="#FF5E330A"/>
+                        <TextBlock x:Name="TamingTimeTextBlock"
+                                   Text="Temps d'apprivoisement : --:--"
+                                   Margin="3"
+                                   Foreground="#FF5E330A"/>
+                        <TextBlock x:Name="TamingEfficiencyTextBlock"
+                                   Text="Efficacité : -- %"
+                                   Margin="3"
+                                   Foreground="#FF5E330A"/>
+                        <TextBlock x:Name="TamingLevelTextBlock"
+                                   Text="Niveau final : --"
+                                   Margin="3"
+                                   Foreground="#FF5E330A"/>
 
-                        <Button Content="Ajouter au profil" Width="160"
-                            Background="#FFD16F1E"
-                            BorderBrush="#FF5E330A"
-                            FontWeight="Bold"
-                            HorizontalAlignment="Left"
-                            Click="AddTamingToProfile_Click"/>
+                        <Button Content="Ajouter au profil"
+                                Width="160"
+                                Background="#FFD16F1E"
+                                BorderBrush="#FF5E330A"
+                                FontWeight="Bold"
+                                HorizontalAlignment="Left"
+                                Click="AddTamingToProfile_Click"/>
                     </StackPanel>
                 </GroupBox>
-            </StackPanel>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>

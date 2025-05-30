@@ -31,7 +31,7 @@ namespace GeckoDexWPFApp
             foreach (var item in kibbleElements.Concat(narcoticElements))
             {
                 var recipeElement = CreateRecipeUI(item);
-                RecipesStackPanel.Children.Add(recipeElement);
+                RecipesStackPanel.Items.Add(recipeElement);
             }
         }
 
@@ -44,9 +44,15 @@ namespace GeckoDexWPFApp
             var image = new Image
             {
                 Source = new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute)),
-                Height = 100,
-                Width = 100,
-                Margin = new Thickness(10),
+                Stretch = Stretch.Uniform,
+                Margin = new Thickness(10)
+            };
+
+            var imageContainer = new Viewbox
+            {
+                MaxHeight = 100,
+                MaxWidth = 100,
+                Child = image,
                 VerticalAlignment = VerticalAlignment.Top
             };
 
@@ -56,7 +62,8 @@ namespace GeckoDexWPFApp
                 FontSize = 18,
                 FontWeight = FontWeights.Bold,
                 Foreground = new SolidColorBrush(Color.FromRgb(94, 51, 10)),
-                Margin = new Thickness(5, 0, 5, 5)
+                Margin = new Thickness(5, 0, 5, 5),
+                TextWrapping = TextWrapping.Wrap
             };
 
             var descBlock = new TextBlock
@@ -102,7 +109,11 @@ namespace GeckoDexWPFApp
                 componentsPanel.Children.Add(compStack);
             }
 
-            var rightPanel = new StackPanel();
+            var rightPanel = new StackPanel
+            {
+                Margin = new Thickness(5),
+                VerticalAlignment = VerticalAlignment.Top
+            };
             rightPanel.Children.Add(nameBlock);
             rightPanel.Children.Add(descBlock);
             rightPanel.Children.Add(new Separator());
@@ -112,10 +123,10 @@ namespace GeckoDexWPFApp
             mainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             mainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
-            Grid.SetColumn(image, 0);
+            Grid.SetColumn(imageContainer, 0);
             Grid.SetColumn(rightPanel, 1);
 
-            mainGrid.Children.Add(image);
+            mainGrid.Children.Add(imageContainer);
             mainGrid.Children.Add(rightPanel);
 
             return new Border

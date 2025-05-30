@@ -49,16 +49,36 @@
     <None Remove="Img\Component\Spoiled_Meat.png" />
     <None Remove="Img\Component\Superior_Kibble.png" />
     <None Remove="Img\Component\Tintoberry.png" />
+    <None Remove="Img\Dinosaure\Allosaurus.png" />
+    <None Remove="Img\Dinosaure\Ankylosaurus.png" />
+    <None Remove="Img\Dinosaure\Araneo.png" />
     <None Remove="Img\Dinosaure\Argentavis.png" />
+    <None Remove="Img\Dinosaure\Baryonyx.png" />
+    <None Remove="Img\Dinosaure\Basilosaurus.png" />
     <None Remove="Img\Dinosaure\Brontosaurus.png" />
+    <None Remove="Img\Dinosaure\Carbonemys.png" />
+    <None Remove="Img\Dinosaure\Carnotaurus.png" />
+    <None Remove="Img\Dinosaure\Daeodon.png" />
+    <None Remove="Img\Dinosaure\Dilophosaur.png" />
+    <None Remove="Img\Dinosaure\Diplodocus.png" />
+    <None Remove="Img\Dinosaure\Dodo.png" />
+    <None Remove="Img\Dinosaure\Dunkleosteus.png" />
     <None Remove="Img\Dinosaure\Giganotosaurus.png" />
+    <None Remove="Img\Dinosaure\Kentrosaurus.png" />
+    <None Remove="Img\Dinosaure\Mammoth.png" />
+    <None Remove="Img\Dinosaure\Megalodon.png" />
     <None Remove="Img\Dinosaure\Mosasaurus.png" />
+    <None Remove="Img\Dinosaure\Parasaur.png" />
     <None Remove="Img\Dinosaure\Pteranodon.png" />
+    <None Remove="Img\Dinosaure\Quetzal.png" />
     <None Remove="Img\Dinosaure\Raptor.png" />
     <None Remove="Img\Dinosaure\Rex.png" />
+    <None Remove="Img\Dinosaure\Sarco.png" />
     <None Remove="Img\Dinosaure\Spinosaurus.png" />
     <None Remove="Img\Dinosaure\Stegosaurus.png" />
     <None Remove="Img\Dinosaure\Triceratops.png" />
+    <None Remove="Img\Dinosaure\Tusoteuthis.png" />
+    <None Remove="Img\Dinosaure\Yutyrannus.png" />
     <None Remove="Img\MemoButton.png" />
     <None Remove="Img\NoteBookButton.png" />
     <None Remove="Img\Reload.png" />
@@ -181,25 +201,79 @@
     <Resource Include="Img\Component\Tintoberry.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Img\Dinosaure\Allosaurus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Ankylosaurus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Araneo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Img\Dinosaure\Argentavis.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Baryonyx.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Basilosaurus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\Dinosaure\Brontosaurus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Img\Dinosaure\Carbonemys.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Carnotaurus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Daeodon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Dilophosaur.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Diplodocus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Dodo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Dunkleosteus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Img\Dinosaure\Giganotosaurus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Kentrosaurus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Mammoth.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Megalodon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\Dinosaure\Mosasaurus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Img\Dinosaure\Parasaur.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Img\Dinosaure\Pteranodon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Quetzal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\Dinosaure\Raptor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\Dinosaure\Rex.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Sarco.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\Dinosaure\Spinosaurus.png">
@@ -209,6 +283,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\Dinosaure\Triceratops.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Tusoteuthis.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Img\Dinosaure\Yutyrannus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Img\MemoButton.png">

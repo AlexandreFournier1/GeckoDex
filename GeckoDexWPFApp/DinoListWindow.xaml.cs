@@ -46,15 +46,13 @@ namespace GeckoDexWPFApp
 
         public Border CreateDinoRectangle(Dinosaure dino)
         {
-            // Texte de la description
             var nameBlock = new TextBlock
             {
                 Text = dino.Name,
                 FontSize = 16,
                 Foreground = new BrushConverter().ConvertFrom("#FF5E330A") as Brush,
                 Padding = new Thickness(5),
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Center
+                HorizontalAlignment = HorizontalAlignment.Left
             };
 
             var typeBlock = new TextBlock
@@ -63,8 +61,7 @@ namespace GeckoDexWPFApp
                 FontSize = 14,
                 Foreground = new BrushConverter().ConvertFrom("#FF5E330A") as Brush,
                 Padding = new Thickness(5),
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Center
+                HorizontalAlignment = HorizontalAlignment.Left
             };
 
             var foodBlock = new TextBlock
@@ -73,13 +70,22 @@ namespace GeckoDexWPFApp
                 FontSize = 14,
                 Foreground = new BrushConverter().ConvertFrom("#FF5E330A") as Brush,
                 Padding = new Thickness(5),
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Center
+                HorizontalAlignment = HorizontalAlignment.Left
             };
 
             var image = new Image
             {
-                Source = new BitmapImage(new Uri(dino.ImagePath, UriKind.RelativeOrAbsolute))
+                Source = new BitmapImage(new Uri(dino.ImagePath, UriKind.RelativeOrAbsolute)),
+                Stretch = Stretch.Uniform,
+                Margin = new Thickness(10),
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch
+            };
+
+            var imageContainer = new Viewbox
+            {
+                Stretch = Stretch.Uniform,
+                Child = image
             };
 
             var textGrid = new Grid();
@@ -105,7 +111,6 @@ namespace GeckoDexWPFApp
                 BorderThickness = new Thickness(2),
                 Margin = new Thickness(10),
                 MinHeight = 100,
-                MinWidth = 500,
                 Child = textGrid
             };
 
@@ -113,7 +118,7 @@ namespace GeckoDexWPFApp
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(4, GridUnitType.Star) });
 
-            grid.Children.Add(image);
+            grid.Children.Add(imageContainer);
             Grid.SetColumn(innerBorder, 1);
             grid.Children.Add(innerBorder);
 
@@ -124,93 +129,14 @@ namespace GeckoDexWPFApp
                 BorderThickness = new Thickness(2),
                 Margin = new Thickness(10),
                 MinHeight = 100,
-                MinWidth = 750,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
                 Child = grid
             };
 
-            // Handler de clic unique
             outerBorder.DataContext = dino;
             outerBorder.MouseLeftButtonDown += RedirectionToDescription;
 
             return outerBorder;
-        }
-
-        private Kibble GetKibbleFromJson(IEnumerable<JsonElement> kibbles, int kibbleId, JsonElement dino)
-        {
-            foreach (JsonElement kibb in kibbles)
-            {
-                if (kibb.GetProperty("Id").GetInt32() == kibbleId)
-                {
-                    List<Component> components = new();
-
-                    foreach (JsonElement comp in kibb.GetProperty("Recipe").GetProperty("Components").EnumerateArray())
-                    {
-                        ComponentBuilder compBuilder = new ComponentBuilder()
-                            .SetId(comp.GetProperty("Id").GetInt32())
-                            .SetName(comp.GetProperty("Name").GetString())
-                            .SetQuantity(comp.GetProperty("Quantity").GetInt32())
-                            .SetImagePath(comp.GetProperty("ImagePath").GetString())
-                            .SetDescription(comp.GetProperty("Description").GetString());
-
-                        components.Add(compBuilder.Build());
-                    }
-
-                    Recipe recipe = new Recipe(components);
-
-                    KibbleBuilder builder = new KibbleBuilder()
-                        .SetId(kibbleId)
-                        .SetName(kibb.GetProperty("Name").GetString())
-                        .SetDescription(kibb.GetProperty("Description").GetString())
-                        .SetImagePath(kibb.GetProperty("ImagePath").GetString())
-                        .SetRecipe(recipe)
-                        .SetKibbleType(Enum.Parse<KibbleType>(kibb.GetProperty("KibbleType").GetString()))
-                        .SetTamingEffectiveness(kibb.GetProperty("TamingEffectiveness").GetInt32())
-                        .SetFoodPoints(kibb.GetProperty("FoodPoints").GetInt32());
-
-                    return builder.Build();
-                }
-            }
-
-            // Si aucun trouvé
-            return new Kibble();
-        }
-
-        private Narcotic GetNarcoticFromJson(IEnumerable<JsonElement> narcos, int narcoticId, JsonElement dino)
-        {
-            foreach (JsonElement narco in narcos)
-            {
-                if (narco.GetProperty("Id").GetInt32() == narcoticId)
-                {
-                    List<Component> components = new();
-
-                    foreach (JsonElement comp in narco.GetProperty("Recipe").GetProperty("Components").EnumerateArray())
-                    {
-                        ComponentBuilder compBuilder = new ComponentBuilder()
-                            .SetId(comp.GetProperty("Id").GetInt32())
-                            .SetName(comp.GetProperty("Name").GetString())
-                            .SetQuantity(comp.GetProperty("Quantity").GetInt32())
-                            .SetImagePath(comp.GetProperty("ImagePath").GetString())
-                            .SetDescription(comp.GetProperty("Description").GetString());
-
-                        components.Add(compBuilder.Build());
-                    }
-
-                    Recipe recipe = new Recipe(components);
-
-                    NarcoticBuilder builder = new NarcoticBuilder()
-                        .SetId(narcoticId)
-                        .SetName(narco.GetProperty("Name").GetString())
-                        .SetDescription(narco.GetProperty("Description").GetString())
-                        .SetImagePath(narco.GetProperty("ImagePath").GetString())
-                        .SetRecipe(recipe)
-                        .SetTorpidity(narco.GetProperty("Torpidity").GetInt32());
-
-                    return builder.Build();
-                }
-            }
-
-            // Si aucun trouvé
-            return new Narcotic();
         }
 
         private void Grid_Loaded()
@@ -233,10 +159,10 @@ namespace GeckoDexWPFApp
                 int narcoticId = dino.GetProperty("NarcoticId").GetInt32();
 
                 // === Récupérer le Kibble correspondant ===
-                Kibble kibble = GetKibbleFromJson(kibbles, kibbleId, dino);
+                Kibble kibble = GetElementFromJSON.GetKibbleFromJson(kibbles, kibbleId);
 
                 // === Récupérer le Narcotic correspondant ===
-                Narcotic narcotic = GetNarcoticFromJson(narcos, narcoticId, dino);
+                Narcotic narcotic = GetElementFromJSON.GetNarcoticFromJson(narcos, narcoticId);
 
                 // === Statistiques ===
                 Statistics statistics = new StatisticsBuilder()
@@ -272,7 +198,7 @@ namespace GeckoDexWPFApp
             foreach (var d in dinosaures)
             {
                 var rectangle = CreateDinoRectangle(d);
-                ListDinoStackPanel.Children.Add(rectangle);
+                ListDinoItemsControl.Items.Add(rectangle);
             }
         }
     }
