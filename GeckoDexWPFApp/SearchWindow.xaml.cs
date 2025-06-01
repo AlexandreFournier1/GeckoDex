@@ -32,6 +32,24 @@ namespace GeckoDexWPFApp
         public SearchWindow()
         {
             InitializeComponent();
+            TryAutoLogin();
+        }
+
+        private void TryAutoLogin()
+        {
+            string? lastUsername = new MyAppParamManager().LastUsername;
+
+            if (!string.IsNullOrWhiteSpace(lastUsername))
+            {
+                var users = UserManager.LoadUsers();
+                var user = users.FirstOrDefault(u => u.Username == lastUsername);
+
+                if (user != null)
+                {
+                    SessionManager.CurrentUser = user;
+                    Console.WriteLine($"Connexion automatique de {user.Username}");
+                }
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

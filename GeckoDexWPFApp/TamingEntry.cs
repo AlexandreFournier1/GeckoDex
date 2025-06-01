@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace GeckoDexWPFApp
 {
+    [Serializable]
     public class TamingEntry : INotifyPropertyChanged
     {
         #region Member variables and properties

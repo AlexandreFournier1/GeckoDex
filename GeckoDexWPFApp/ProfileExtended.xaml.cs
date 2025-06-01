@@ -102,6 +102,10 @@ namespace GeckoDexWPFApp
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             SessionManager.Logout();
+
+            // ⛔ Supprime l'utilisateur enregistré dans le registre
+            new MyAppParamManager().ClearLastUsername();
+
             MessageBox.Show("Déconnecté avec succès.");
             this.Close();
         }
@@ -199,14 +203,19 @@ namespace GeckoDexWPFApp
         {
             SaveFileDialog dialog = new SaveFileDialog
             {
-                Filter = "Fichier JSON (*.json)|*.json",
-                FileName = $"Tamings_{CurrentUser.Username}.json"
+                Filter = "Fichier XML (*.xml)|*.xml",
+                FileName = $"Tamings_{CurrentUser.Username}.xml"
             };
 
             if (dialog.ShowDialog() == true)
             {
-                string json = JsonSerializer.Serialize(Tamings.ToList(), new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(dialog.FileName, json);
+                var serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<TamingEntry>));
+
+                using (var stream = new FileStream(dialog.FileName, FileMode.Create))
+                {
+                    serializer.Serialize(stream, Tamings.ToList());
+                }
+
                 MessageBox.Show("Tamings exportés avec succès.", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
@@ -215,33 +224,37 @@ namespace GeckoDexWPFApp
         {
             OpenFileDialog dialog = new OpenFileDialog
             {
-                Filter = "Fichier JSON (*.json)|*.json"
+                Filter = "Fichier XML (*.xml)|*.xml"
             };
 
             if (dialog.ShowDialog() == true)
             {
-                string json = File.ReadAllText(dialog.FileName);
-                var importedTamings = JsonSerializer.Deserialize<List<TamingEntry>>(json);
-
-                if (importedTamings != null)
+                try
                 {
-                    int added = 0;
+                    var serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<TamingEntry>));
 
-                    foreach (var entry in importedTamings)
+                    using (var stream = new FileStream(dialog.FileName, FileMode.Open))
                     {
-                        if (!Tamings.Contains(entry))
-                        {
-                            Tamings.Add(entry);
-                            added++;
-                        }
-                    }
+                        var importedTamings = (List<TamingEntry>)serializer.Deserialize(stream);
 
-                    SaveTamings();
-                    MessageBox.Show($"{added} taming(s) importé(s) avec succès.", "Import", MessageBoxButton.OK, MessageBoxImage.Information);
+                        int added = 0;
+
+                        foreach (var entry in importedTamings)
+                        {
+                            if (!Tamings.Contains(entry))
+                            {
+                                Tamings.Add(entry);
+                                added++;
+                            }
+                        }
+
+                        SaveTamings(); // encore en JSON local
+                        MessageBox.Show($"{added} taming(s) importé(s) avec succès.", "Import", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Le fichier est vide ou invalide.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Erreur lors de l'importation : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

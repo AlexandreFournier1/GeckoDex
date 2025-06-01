@@ -55,6 +55,10 @@ namespace GeckoDexWPFApp.SecondaryWindows
             if (user != null)
             {
                 SessionManager.CurrentUser = user;
+
+                // 🔐 Enregistre l'utilisateur connecté dans le registre
+                new MyAppParamManager().LastUsername = user.Username;
+
                 MessageBox.Show("Login successful.");
                 this.DialogResult = true;
                 this.Close();
