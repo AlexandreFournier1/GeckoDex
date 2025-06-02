@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace GeckoDexUserManager
 {
+    /// <summary>
+    /// Represents a user in the application.
+    /// </summary>
     public class User : INotifyPropertyChanged
     {
         #region Member variables and properties

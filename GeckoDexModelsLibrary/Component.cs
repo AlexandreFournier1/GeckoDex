@@ -5,6 +5,9 @@ using static GeckoDexModelsLibrary.Boss;
 
 namespace GeckoDexModelsLibrary
 {
+    /// <summary>
+    /// Class representing a Component in the game, which is a type of GameObject.
+    /// </summary>
     public class Component : GameObject, INotifyPropertyChanged
     {
         #region Member variables and properties

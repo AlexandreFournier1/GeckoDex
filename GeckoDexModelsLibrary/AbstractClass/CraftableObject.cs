@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace GeckoDexModelsLibrary.AbstractClass
 {
+    /// <summary>
+    /// Abstract class representing a craftable object in the game.
+    /// </summary>
     public abstract class CraftableObject : GameObject, INotifyPropertyChanged
     {
         #region Member variables and properties

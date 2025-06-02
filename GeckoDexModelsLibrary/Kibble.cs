@@ -6,6 +6,9 @@ using static GeckoDexModelsLibrary.Food;
 
 namespace GeckoDexModelsLibrary
 {
+    /// <summary>
+    /// Class representing a Kibble in the game, which is a type of CraftableObject and also implements IFood.
+    /// </summary>
     public class Kibble : CraftableObject, IFood, INotifyPropertyChanged
     {
         #region Member variables and properties

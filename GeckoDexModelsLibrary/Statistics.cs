@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace GeckoDexModelsLibrary
 {
+    /// <summary>
+    /// Class representing the statistics of a creature in the game.
+    /// </summary>
     public class Statistics : INotifyPropertyChanged
     {
         #region Member variables and properties

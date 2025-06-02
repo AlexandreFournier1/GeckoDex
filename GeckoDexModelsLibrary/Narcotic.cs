@@ -5,6 +5,9 @@ using static GeckoDexModelsLibrary.Kibble;
 
 namespace GeckoDexModelsLibrary
 {
+    /// <summary>
+    /// Class representing a Narcotic in the game, which is a type of CraftableObject.
+    /// </summary>
     public class Narcotic : CraftableObject, INotifyPropertyChanged
     {
         #region Member variables and properties

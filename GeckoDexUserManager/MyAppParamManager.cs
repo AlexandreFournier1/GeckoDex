@@ -2,8 +2,12 @@
 
 namespace GeckoDexUserManager
 {
+    /// <summary>
+    /// Class for managing application parameters stored in the Windows Registry.
+    /// </summary>
     public class MyAppParamManager
     {
+        // Clé principale dans le registre où l’application va stocker ses données
         private const string RegistryRoot = @"Software\GeckoDex";
 
         public string? LastUsername

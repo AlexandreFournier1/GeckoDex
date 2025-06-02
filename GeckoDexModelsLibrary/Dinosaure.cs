@@ -4,6 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace GeckoDexModelsLibrary
 {
+    /// <summary>
+    /// Class representing a Dinosaure in the game, which is a type of Creature.
+    /// </summary>
     public class Dinosaure : Creature, INotifyPropertyChanged
     {
         #region Member variables and properties

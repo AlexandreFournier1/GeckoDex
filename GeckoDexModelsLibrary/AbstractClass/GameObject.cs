@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace GeckoDexModelsLibrary.AbstractClass
 {
+    /// <summary>
+    /// Abstract class representing a game object.
+    /// </summary>
     public abstract class GameObject : INotifyPropertyChanged
     {
         #region Member variables and properties

@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace GeckoDexModelsLibrary
 {
+    /// <summary>
+    /// Class representing a Recipe in the game, which contains a list of Components.
+    /// </summary>
     public class Recipe : INotifyPropertyChanged
     {
         #region Member variables and properties

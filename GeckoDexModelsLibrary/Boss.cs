@@ -5,11 +5,11 @@ using static GeckoDexModelsLibrary.Dinosaure;
 
 namespace GeckoDexModelsLibrary
 {
+    /// <summary>
+    /// Class representing a Boss in the game, which is a type of Creature.
+    /// </summary>
     public class Boss : Creature, INotifyPropertyChanged
     {
-        /// <summary>
-        /// Class representing a Boss in the game.
-        /// </summary>
         #region Member variables and properties
 
         private string _arena;

@@ -6,6 +6,9 @@ using static GeckoDexModelsLibrary.Component;
 
 namespace GeckoDexModelsLibrary
 {
+    /// <summary>
+    /// Class representing a Food in the game, which is a type of GameObject and also implements IFood.
+    /// </summary>
     public class Food : GameObject, IFood, INotifyPropertyChanged
     {
         #region Member variables and properties

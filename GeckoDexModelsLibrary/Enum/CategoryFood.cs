@@ -1,5 +1,8 @@
 ﻿namespace GeckoDexModelsLibrary
 {
+    /// <summary>
+    /// Enumeration representing different categories of food items in the game.
+    /// </summary>
     public enum CategoryFood
     {
         Undefined,

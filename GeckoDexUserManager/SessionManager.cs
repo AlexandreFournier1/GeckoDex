@@ -1,5 +1,8 @@
 ﻿namespace GeckoDexUserManager
 {
+    /// <summary>
+    /// Class for managing the current user session in the application.
+    /// </summary>
     public static class SessionManager
     {
         public static User? CurrentUser { get; set; } = null;

@@ -2,6 +2,9 @@
 
 namespace GeckoDexUserManager
 {
+    /// <summary>
+    /// Class for managing user accounts in the application.
+    /// </summary>
     public class UserManager
     {
         private static string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Users", "users.json");
