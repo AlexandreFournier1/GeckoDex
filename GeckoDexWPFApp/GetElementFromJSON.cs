@@ -6,6 +6,9 @@ using static GeckoDexModelsLibrary.Narcotic;
 
 namespace GeckoDexWPFApp
 {
+    /// <summary>
+    /// Class to retrieve specific elements from JSON data.
+    /// </summary>
     public class GetElementFromJSON
     {
         public static Kibble GetKibbleFromJson(IEnumerable<JsonElement> kibbles, int kibbleId)

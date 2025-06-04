@@ -141,14 +141,14 @@ namespace GeckoDexWPFApp
             TamingEntry.RemainingTime = tamingTime;
             TamingEntry.StartTime = DateTime.Now;
 
-            // 🔍 Vérifier s'il y a déjà une fenêtre ouverte
+            // Vérifier s'il y a déjà une fenêtre ouverte
             var profile = Application.Current.Windows
                 .OfType<ProfileExtended>()
                 .FirstOrDefault();
 
             if (profile != null)
             {
-                // ✅ Ajouter uniquement si non déjà présent (prévenir doublon)
+                // Ajouter uniquement si non déjà présent (prévenir doublon)
                 bool alreadyExists = profile.Tamings.Any(t =>
                     t.Dinosaure.Name == TamingEntry.Dinosaure.Name &&
                     t.DinoLevel == TamingEntry.DinoLevel);

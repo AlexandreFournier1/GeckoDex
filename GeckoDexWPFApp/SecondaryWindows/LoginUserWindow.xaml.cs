@@ -50,13 +50,14 @@ namespace GeckoDexWPFApp.SecondaryWindows
             string username = LoginUsernameBox.Text.Trim();
             string password = LoginPasswordBox.Password;
 
+            // On vérifie si le user existe et si le mot de passe est correct
             var user = UserManager.LoadUsers().FirstOrDefault(u => u.Username == username && u.Password == password);
 
             if (user != null)
             {
                 SessionManager.CurrentUser = user;
 
-                // 🔐 Enregistre l'utilisateur connecté dans le registre
+                // Enregistre l'utilisateur connecté dans le registre
                 new MyAppParamManager().LastUsername = user.Username;
 
                 MessageBox.Show("Login successful.");

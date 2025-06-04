@@ -76,8 +76,7 @@ namespace GeckoDexWPFApp
             {
                 ProfileImage.Source = new BitmapImage(new Uri("Img/User.png", UriKind.Relative));
             }
-
-            //LoadTamings();
+            
             TamingCountTextBlock.Text = $"Nombre de taming : {LoadTamings()}";
 
             _timer = new DispatcherTimer
@@ -103,7 +102,7 @@ namespace GeckoDexWPFApp
         {
             SessionManager.Logout();
 
-            // ⛔ Supprime l'utilisateur enregistré dans le registre
+            // Supprime l'utilisateur enregistré dans le registre
             new MyAppParamManager().ClearLastUsername();
 
             MessageBox.Show("Déconnecté avec succès.");
@@ -129,8 +128,6 @@ namespace GeckoDexWPFApp
                     }  
                 }
             }
-
-            //TamingCountTextBlock.Text = $"Nombre de taming : {tamingCount}";
 
             return tamingCount;
         }
@@ -178,15 +175,6 @@ namespace GeckoDexWPFApp
                 }
 
                 MessageBox.Show("Image de profil mise à jour !");
-            }
-        }
-
-        private void TamingItem_Click(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is StackPanel panel && panel.DataContext is TamingEntry entry)
-            {
-                var window = new TamingExtendedWindow(entry);
-                window.Show();
             }
         }
 

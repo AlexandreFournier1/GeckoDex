@@ -4,6 +4,9 @@ using System.Runtime.CompilerServices;
 
 namespace GeckoDexWPFApp
 {
+    /// <summary>
+    /// Represents an entry for a taming process of a dinosaur in the game.
+    /// </summary>
     [Serializable]
     public class TamingEntry : INotifyPropertyChanged
     {
